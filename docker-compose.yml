@@ -1,0 +1,37 @@
+version: "3"
+services:
+  app:
+    container_name: todo-php
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    tty: true
+    volumes:
+      - ./src/:/var/www/html
+      - ./php/php.ini:/usr/local/etc/php/php.ini
+    ports:
+      - "80:80"
+    networks:
+      - todo
+
+  db1:
+    container_name: todo-mysql
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: root #rootユーザ用のパスワード
+      MYSQL_USER: user1 #作業ユーザ名
+      MYSQL_PASSWORD: pass #作業ユーザ用のパスワード
+      MYSQL_DATABASE: store_db
+      TZ: "Asia/Tokyo"
+    ports:
+      - "3306:3306"
+    volumes:
+      # MySQLの設定ファイル
+      - ./mysql/mysql_conf:/etc/mysql/conf.d
+    networks:
+      - todo
+
+networks:
+  todo:
