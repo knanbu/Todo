@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+/* 共通部分 */
+html {
+    font-size: 100%;
+}
+
+.wrapper {
+    font-family: 'Noto Serif JP';
+}
