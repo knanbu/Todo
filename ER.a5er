@@ -1,0 +1,221 @@
+﻿# A5:ER FORMAT:14
+# A5:ER ENCODING:UTF8
+# A5:ER Mk-1 Copyright (C)2007 m.matsubara
+# A5:SQL Mk-2 Copyright (C)1997 m.matsubara
+#  https://a5m2.mmatsubara.com
+
+[Manager]
+ProjectName=todo
+Author=urano
+MaxEntityRowShow=1000
+ReadOnlyRecommend=0
+Page=Main
+PageInfo="Main",2,"A3Landscape",$FFFFFF
+LogicalView=1
+DecodeDomain=0
+ViewModePageIndividually=1
+ViewMode=2
+ViewFormat=0
+UseNondependenceDashLine=0
+FontName=Tahoma
+FontSize=12
+PaperSize=A4Landscape
+HeaderLeft=
+HeaderCenter=
+HeaderRight=
+FooterLeft=
+FooterCenter=
+FooterRight=
+ShowPageoutRelation=1
+RDBMSType=5
+RDBMSTypeName=MySQL
+DefaultPkName=%0:s_PKC
+DefaultPkIndexName=%0:s_PKI
+DefaultIndexName=%0:s_IX%1:d
+DefaultFkName=%0:s_FK%1:d
+SqlSeparator=0
+UpperCaseKeyword=0
+ShowTag=1
+ShowCommonAttributes=0
+
+[Entity]
+PName=NEW_ENTITY1
+LName=member
+Comment=
+TableOption=
+Page=MAIN
+Left=500
+Top=500
+Field="member_id","member_id","@INT","NOT NULL",0,"","",$FFFFFFFF,""
+Field="member_name","member_name","@VARCHAR","NOT NULL",,"","",$FFFFFFFF,""
+Field="email","email","@VARCHAR","NOT NULL",,"","",$FFFFFFFF,""
+Field="password","password","@VARCHAR","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20200907154349
+Position="MAIN",500,500,460,397
+ZOrder=1
+
+[Entity]
+PName=NEW_ENTITY2
+LName=task
+Comment=
+TableOption=
+Page=MAIN
+Left=1400
+Top=500
+Field="task_id","task_id","@INT","NOT NULL",0,"","",$FFFFFFFF,""
+Field="member_id","member_id","@INT","NOT NULL",,"","",$FFFFFFFF,""
+Field="task_name","task_name","@VARCHAR","NOT NULL",,"","",$FFFFFFFF,""
+Field="category_id","category_id","@INT",,,"0","",$FFFFFFFF,""
+Field="priority","priority","@INT",,,"0","",$FFFFFFFF,""
+Field="start_date","start_date","@DATE",,,"null","",$FFFFFFFF,""
+Field="limit_date","limit_date","@DATE",,,"null","",$FFFFFFFF,""
+Field="delete_flg","delete_flg","@INT","NOT NULL",,"0","",$FFFFFFFF,""
+Field="comment","comment","@VARCHAR",,,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20200907165854
+Position="MAIN",1400,500,404,497
+ZOrder=2
+
+[Relation]
+Entity1=NEW_ENTITY1
+Entity2=NEW_ENTITY2
+RelationType1=2
+RelationType2=3
+Fields1=member_id
+Fields2=member_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,3223,7509,2575,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=322
+Bar2=751
+Bar3=258
+TermPos1=R
+TermPos2=R
+ZOrder=3
+
+[Entity]
+PName=NEW_ENTITY3
+LName=question
+Comment=
+TableOption=
+Page=MAIN
+Left=1400
+Top=1100
+Field="question_id","question_id","@INT","NOT NULL",0,"","",$FFFFFFFF,""
+Field="q_contents","question_name","@VARCHAR",,,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20200907153629
+Position="MAIN",1400,1100,392,393
+ZOrder=5
+
+[Entity]
+PName=NEW_ENTITY4
+LName=answer
+Comment=
+TableOption=
+Page=MAIN
+Left=500
+Top=1100
+Field="answer_id","answer_id","@INT","NOT NULL",0,"","",$FFFFFFFF,""
+Field="question_id","question_id","@INT","NOT NULL",,"","",$FFFFFFFF,""
+Field="member_id","member_id","@INT","NOT NULL",,"","",$FFFFFFFF,""
+Field="a_content","a_content","@VARCHAR","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20200907154119
+Position="MAIN",500,1100,460,379
+ZOrder=6
+
+[Entity]
+PName=NEW_ENTITY5
+LName=category
+Comment=
+TableOption=
+Page=MAIN
+Left=2100
+Top=500
+Field="category_id","category_id","@INT","NOT NULL",0,"","",$FFFFFFFF,""
+Field="task_id","task_id","@INT","NOT NULL",,"","",$FFFFFFFF,""
+Field="member_id","member_id","@INT","NOT NULL",,"","",$FFFFFFFF,""
+Field="c_name","c_name","@VARCHAR",,,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20200908141537
+Position="MAIN",2100,500,413,471
+ZOrder=7
+
+[Relation]
+Entity1=NEW_ENTITY3
+Entity2=NEW_ENTITY4
+RelationType1=2
+RelationType2=3
+Fields1=question_id
+Fields2=question_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,4615,4720,4785,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=462
+Bar2=472
+Bar3=478
+TermPos1=R
+TermPos2=R
+ZOrder=9
+
+[Relation]
+Entity1=NEW_ENTITY1
+Entity2=NEW_ENTITY4
+RelationType1=2
+RelationType2=3
+Fields1=member_id
+Fields2=member_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,5120,10000,5120,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=512
+Bar2=1000
+Bar3=512
+TermPos1=R
+TermPos2=R
+ZOrder=11
+
+[Relation]
+Entity1=NEW_ENTITY2
+Entity2=NEW_ENTITY5
+RelationType1=2
+RelationType2=3
+Fields1=task_id
+Fields2=task_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,2632,7368,2777,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=263
+Bar2=737
+Bar3=278
+TermPos1=R
+TermPos2=R
+ZOrder=13
