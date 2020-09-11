@@ -60,6 +60,10 @@ form div {
     text-align: center;
 }
 
+.red {
+    color: red;
+}
+
 /* ヘッダー */
 header {
     width: 100%;
