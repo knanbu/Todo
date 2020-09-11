@@ -1,16 +1,16 @@
 <?php
-require('./lib/session.php');
+require('./../lib/session.php');
 $title = 'ToDo';
 $ses = new Session();
-require_once('./common/meta.php');
+require_once('./../common/meta.php');
 ?>
 <html>
 
 <body>
-    <?php require_once('./common/header.php'); ?>
+    <?php require_once('./../common/header.php'); ?>
     <div class="wrapper login-box">
         <div class="login-form">
-            <form action="./login/login_check.php" method="post" name="login_form">
+            <form action="./../login/login_check.php" method="post" name="login_form">
                 <div>
                     <p class="red">
                         <?php
@@ -31,10 +31,10 @@ require_once('./common/meta.php');
             <input type="submit" class="button" name="login" value="ログイン" onclick="return err_login(login_form.email.value,login_form.password.value)">
             </form>
             <p><a href="">パスワードを忘れた場合</a></p>
-            <p><a href="./account/regist_acc.php">新規アカウント登録</a></p>
+            <p><a href="./../account/regist_acc.php">新規アカウント登録</a></p>
         </div>
     </div>
-    <?php require_once('./common/footer.php'); ?>
+    <?php require_once('./../common/footer.php'); ?>
 </body>
 
 </html>
