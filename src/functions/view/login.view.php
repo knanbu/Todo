@@ -31,7 +31,7 @@ require_once('./../common/meta.php');
             <input type="submit" class="button" name="login" value="ログイン" onclick="return err_login(login_form.email.value,login_form.password.value)">
             </form>
             <p><a href="">パスワードを忘れた場合</a></p>
-            <p><a href="./../account/regist_acc.php">新規アカウント登録</a></p>
+            <p><a href="regist_acc.php">新規アカウント登録</a></p>
         </div>
     </div>
     <?php require_once('./../common/footer.php'); ?>
