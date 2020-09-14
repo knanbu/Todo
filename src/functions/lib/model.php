@@ -23,7 +23,7 @@ class Database
         return $dbh;
     }
 
-    public function select($table = '', $column = '', $value = '', $option = '') //select文の実行
+    public function select($table = '', $column = '', $value = [], $option = '') //select文の実行
     {
         $type = 'select';
         $sql = $this->createSQL($type, $table, $column, $value) . $option;
@@ -31,6 +31,15 @@ class Database
         $stmt->execute($value);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
+    }
+    public function insert($table = '', $column = '', $value = [], $option = '') //select文の実行
+    {
+        $type = 'insert';
+        var_dump($value);
+        $sql = $this->createSQL($type, $table, $column, $value) . $option;
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($value);
+        return;
     }
 
     private function createSQL($type, $table = '', $column = '', $value = '') //sql文の作成、updateとdeleteの値が少し変わっているので注意
