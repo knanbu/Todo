@@ -27,7 +27,6 @@ img {
 
 input {
     width: auto;
-    max-width: 400;
     background-color: rgba(255, 255, 255, .5);
     border: 1px #fff solid;
     border-radius: 5px;
@@ -35,11 +34,23 @@ input {
     font-size: 1rem;
 }
 
-input[type='submit'] {
+input[type='submit'],
+input[type='button'] {
     border: none;
     cursor: pointer;
     line-height: 1;
     text-align: center;
+}
+
+select {
+    width: auto;
+    max-width: 400;
+    background-color: rgba(255, 255, 255, .5);
+    border: 1px #fff solid;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
 
@@ -50,6 +61,7 @@ form div {
 
 .button {
     font-size: 1.2rem;
+    height: 50px;
 }
 
 .button:hover {
@@ -96,4 +108,41 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+/* アカウント登録画面 */
+.regist-box {
+    background-color: rgb(248, 229, 167);
+    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    min-width: 600px;
+    min-height: 600;
+    margin: 10% 20%;
+}
+
+.regist-box h2 {
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+}
+
+.regist-box form {
+    padding: 20px;
+    min-width: 600px;
+    margin: 0 0 40px 0;
+}
+
+.regist-box form select {
+    width: 217px;
+}
+
+.grid-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 30px;
+    text-align: center;
+}
+
+.grid-form div {
+    margin-top: 0;
 }
