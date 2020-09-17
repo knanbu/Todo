@@ -1,6 +1,9 @@
 <?php
+require_once('./../lib/session.php');
+$ses = new Session();
 $title = '新規会員登録';
 require_once('./../common/meta.php');
+var_dump($_SESSION);
 ?>
 <html>
 
@@ -12,35 +15,85 @@ require_once('./../common/meta.php');
             <form action="./../account/regist.php" method="post" name="regist_form">
                 <div class="grid-form">
                     <div>
-                        <p id="err_name" class="red"></p>
+                        <label class="red">
+                            <?php
+                            if ($_SESSION['err'][0]['err_name']) {
+                                echo $_SESSION['err'][0]['err_name'] . '<br>';
+                            } ?>
+                        </label>
                         <input type="text" name="name" placeholder="ニックネーム"><br>
                     </div>
                     <div></div>
                     <div>
-                        <p id="err_email1" class="red"></p>
+                        <label class="red">
+                            <?php
+                            if ($_SESSION['err'][0]['empty_email']) {
+                                echo $_SESSION['err'][0]['empty_email'] . '<br>';
+                            } elseif ($_SESSION['err'][0]['preg_err_email']) {
+                                echo $_SESSION['err'][0]['preg_err_email'] . '<br>';
+                            } elseif ($_SESSION['err'][0]['isset_email']) {
+                                echo $_SESSION['err'][0]['isset_email'] . '<br>';
+                            }
+                            ?>
+                        </label>
                         <input type="email" name="email" placeholder="メールアドレス"><br>
                     </div>
                     <div>
-                        <p id="err_email2" class="red"></p>
-                        <input type="email" name="email_again" placeholder="メールアドレスの再入力"><br>
+                        <label class="red">
+                            <?php
+                            if ($_SESSION['err'][0]['empty_email']) {
+                                echo $_SESSION['err'][0]['empty_email'] . '<br>';
+                            } elseif ($_SESSION['err'][0]['again_email']) {
+                                echo $_SESSION['err'][0]['again_email'] . '<br>';
+                            }
+                            ?>
+                            <input type="email" name="email_again" placeholder="メールアドレスの再入力"><br>
+                        </label>
                     </div>
                     <div>
-                        <p id="err_password1" class="red"></p>
+                        <label class="red">
+                            <?php
+                            if ($_SESSION['err'][0]['empty_password']) {
+                                echo $_SESSION['err'][0]['empty_password'] . '<br>';
+                            }
+                            // elseif ($_SESSION['err'][0]['preg_err_password']) {
+                            //     echo $_SESSION['err'][0]['preg_err_password'] . '<br>';
+                            // }
+                            ?>
+                        </label>
                         <input type="password" name="password" placeholder="パスワード"><br>
                     </div>
                     <div>
-                        <p id="err_password2" class="red"></p>
-                        <input type="password" name="password" placeholder="パスワードの再入力"><br>
+                        <label class="red">
+                            <?php
+                            if ($_SESSION['err'][0]['empty_password']) {
+                                echo $_SESSION['err'][0]['empty_password'] . '<br>';
+                            } elseif ($_SESSION['err'][0]['password_again']) {
+                                echo $_SESSION['err'][0]['password_again'] . '<br>';
+                            }
+                            ?>
+                        </label>
+                        <input type="password" name="password_again" placeholder="パスワードの再入力"><br>
                     </div>
                     <div>
-                        <p id="err_question" class="red" name='question'></p>
+                        <label class="red" name='question'>
+                            <?php
+                            if ($_SESSION['err'][0]['err_question']) {
+                                echo $_SESSION['err'][0]['err_question'] . '<br>';
+                            } ?>
+                        </label>
                         <select name="question_id">
                             <option value="">未選択</option>
                             <option value="1">データベースの秘密の質問が表示される</option>
                         </select>
                     </div>
                     <div>
-                        <p id="err_answer" class="red"></p>
+                        <label class="red">
+                            <?php
+                            if ($_SESSION['err'][0]['err_answer']) {
+                                echo $_SESSION['err'][0]['err_answer'] . '<br>';
+                            } ?>
+                        </label>
                         <input type="text" name="answer" placeholder="秘密の質問の答え"><br>
                     </div>
                 </div>

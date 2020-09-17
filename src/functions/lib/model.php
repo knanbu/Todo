@@ -28,17 +28,16 @@ class Database
         $type = 'select';
         $sql = $this->createSQL($type, $table, $column, $value) . $option;
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute($value);
+        $res = $stmt->execute($value);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
-    public function insert($table = '', $column = '', $value = [], $option = '') //select文の実行
+    public function insert($table = '', $column = '', $value = '', $pre_value = '', $option = '') //select文の実行
     {
         $type = 'insert';
-        var_dump($value);
         $sql = $this->createSQL($type, $table, $column, $value) . $option;
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute($value);
+        $stmt->execute($pre_value);
         return;
     }
 
@@ -52,7 +51,7 @@ class Database
                 break;
 
             case 'insert':
-                $sql = "insert into {$table} ({$column}) values ( {$value} )";
+                $sql = "insert into {$table} ( {$column} ) values ( {$value} )";
                 break;
 
             case 'update':
