@@ -3,7 +3,6 @@ require_once('./../lib/session.php');
 $ses = new Session();
 $title = '新規会員登録';
 require_once('./../common/meta.php');
-var_dump($_SESSION);
 ?>
 <html>
 
@@ -84,7 +83,7 @@ var_dump($_SESSION);
                         </label>
                         <select name="question_id">
                             <option value="">未選択</option>
-                            <option value="1">データベースの秘密の質問が表示される</option>
+                            <option value="1">小学校の名前は？</option>
                         </select>
                     </div>
                     <div>
