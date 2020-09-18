@@ -70,7 +70,7 @@ class  Validate
 
         //再入力の部分に間違えがないかチェック
         if ($data['password'] !== $data['password_again']) {
-            $this->err_array['again_password'] = 'パスワードを間違っています';
+            $this->err_array['again_password'] = 'パスワードを間違えています';
         }
 
         // //正規表現チェック
@@ -83,23 +83,19 @@ class  Validate
 
     private function check_email($data)
     {
-        $count = 0;
         //空白チェック
         if (empty($data['email'])) {
             $this->err_array['empty_email'] = $this->err_empty;
-            $count++;
         }
         //再入力の部分に間違えがないかチェック
         if ($data['email'] !== $data['email_again']) {
             $this->err_array['again_email'] = '同じメールアドレスを入力してください';
-            $count++;
         }
         //メールアドレスの正規表現チェック
         $correct_email = "/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i";
         $preg = preg_match($correct_email, $data['email']);
         if ($preg === 0) { //形式が合わない場合
             $this->err_array['preg_err_email'] = 'メールアドレスを正しく入力してください';
-            $count++;
         }
     }
 }
