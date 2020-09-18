@@ -41,6 +41,15 @@ class Database
         return;
     }
 
+    public function update($table = '', $column = '', $value = '', $pre_value = '', $option = '')
+    {
+        $type = 'update';
+        $sql = $this->createSQL($type, $table, $column, $value) . $option;
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($pre_value);
+        return;
+    }
+
     private function createSQL($type, $table = '', $column = '', $value = '') //sql文の作成、updateとdeleteの値が少し変わっているので注意
     {
         $sql = '';
@@ -55,7 +64,7 @@ class Database
                 break;
 
             case 'update':
-                $sql = "update {$table} set {$value}";
+                $sql = "update {$table} set {$column}={$value}";
                 break;
 
             case 'delete':
