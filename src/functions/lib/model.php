@@ -29,7 +29,7 @@ class Database
         $sql = $this->createSQL($type, $table, $column, $value) . $option;
         $stmt = $this->pdo->prepare($sql);
         $res = $stmt->execute($value);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
     public function insert($table = '', $column = '', $value = '', $pre_value = '', $option = '') //select文の実行
@@ -45,6 +45,14 @@ class Database
     {
         $type = 'update';
         $sql = $this->createSQL($type, $table, $column, $value) . $option;
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($pre_value);
+        return;
+    }
+    public function delete($table = '', $column = '', $pre_value = '', $option = '')
+    {
+        $type = 'delete';
+        $sql = $this->createSQL($type, $table, $column) . $option;
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($pre_value);
         return;
@@ -68,7 +76,7 @@ class Database
                 break;
 
             case 'delete':
-                $sql = "delete from {$table} where {$column} ";
+                $sql = "delete from {$table} where {$column}";
                 break;
         }
         return $sql;

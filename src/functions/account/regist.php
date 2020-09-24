@@ -17,11 +17,12 @@ if (empty($err_array)) { //エラーがなければアカウント登録開始
     if ($result === null) {
         unset($_SESSION);
         $acc->regist_account($data);
+        header('Location:' . './../view/task_show.view.php'); //タスク一覧画面へ進む
     } else {
         $_SESSION['err'] = $err_array;
-        header('Location:' . './../view/regist_acc.view.php');
+        header('Location:' . './../view/regist_acc.view.php'); //再登録
     }
 } else {
     $_SESSION['err'] = $err_array;
-    header('Location:' . './../view/regist_acc.view.php');
+    header('Location:' . './../view/regist_acc.view.php'); //再登録
 }
