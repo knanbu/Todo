@@ -18,7 +18,7 @@ class Info_change
         ];
         $option = ' where G.email=:email and G.question_id=:question_id and G.a_content=:a_content ';
         $result = $this->pdo->select($table, $column, $value, $option);
-        return $result['member_id'];
+        return $result[0]['member_id'];
     }
     public function password_update($data, $member_id) //パスワード変更
     {
