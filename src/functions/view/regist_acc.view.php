@@ -16,7 +16,7 @@ require_once('./../common/meta.php');
                     <div>
                         <label class="red">
                             <?php
-                            if ($_SESSION['err'][0]['err_name']) {
+                            if ($_SESSION['err'][0]['err_name']) {//エラー文表示
                                 echo $_SESSION['err'][0]['err_name'] . '<br>';
                             } ?>
                         </label>
@@ -26,7 +26,7 @@ require_once('./../common/meta.php');
                     <div>
                         <label class="red">
                             <?php
-                            if ($_SESSION['err'][0]['empty_email']) {
+                            if ($_SESSION['err'][0]['empty_email']) {//エラー文表示
                                 echo $_SESSION['err'][0]['empty_email'] . '<br>';
                             } elseif ($_SESSION['err'][0]['preg_err_email']) {
                                 echo $_SESSION['err'][0]['preg_err_email'] . '<br>';
@@ -40,7 +40,7 @@ require_once('./../common/meta.php');
                     <div>
                         <label class="red">
                             <?php
-                            if ($_SESSION['err'][0]['empty_email']) {
+                            if ($_SESSION['err'][0]['empty_email']) {//エラー文表示
                                 echo $_SESSION['err'][0]['empty_email'] . '<br>';
                             } elseif ($_SESSION['err'][0]['again_email']) {
                                 echo $_SESSION['err'][0]['again_email'] . '<br>';
@@ -52,7 +52,7 @@ require_once('./../common/meta.php');
                     <div>
                         <label class="red">
                             <?php
-                            if ($_SESSION['err'][0]['empty_password']) {
+                            if ($_SESSION['err'][0]['empty_password']) {//エラー文表示
                                 echo $_SESSION['err'][0]['empty_password'] . '<br>';
                             }
                             // elseif ($_SESSION['err'][0]['preg_err_password']) {
@@ -65,7 +65,7 @@ require_once('./../common/meta.php');
                     <div>
                         <label class="red">
                             <?php
-                            if ($_SESSION['err'][0]['empty_password']) {
+                            if ($_SESSION['err'][0]['empty_password']) {//エラー文表示
                                 echo $_SESSION['err'][0]['empty_password'] . '<br>';
                             } elseif ($_SESSION['err'][0]['password_again']) {
                                 echo $_SESSION['err'][0]['password_again'] . '<br>';
@@ -77,7 +77,7 @@ require_once('./../common/meta.php');
                     <div>
                         <label class="red" name='question'>
                             <?php
-                            if ($_SESSION['err'][0]['err_question']) {
+                            if ($_SESSION['err'][0]['err_question']) {//エラー文表示
                                 echo $_SESSION['err'][0]['err_question'] . '<br>';
                             } ?>
                         </label>
@@ -89,7 +89,7 @@ require_once('./../common/meta.php');
                     <div>
                         <label class="red">
                             <?php
-                            if ($_SESSION['err'][0]['err_answer']) {
+                            if ($_SESSION['err'][0]['err_answer']) {//エラー文表示
                                 echo $_SESSION['err'][0]['err_answer'] . '<br>';
                             } ?>
                         </label>

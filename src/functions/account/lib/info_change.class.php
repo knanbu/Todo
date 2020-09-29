@@ -22,7 +22,7 @@ class Info_change
     }
     public function password_update($data, $member_id) //パスワード変更
     {
-        $password = password_hash($data['password'], PASSWORD_DEFAULT);
+        $password = password_hash($data['password'], PASSWORD_DEFAULT);//パスワードのハッシュ化
         $table = ' Member ';
         $column = ' pass ';
         $value = ' :password ';

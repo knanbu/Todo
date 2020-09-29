@@ -20,7 +20,7 @@ require_once('./../common/meta.php');
                     <input type="password" name="password_again" placeholder="パスワード再入力">
                     <p class="red">
                         <?php
-                        if ($_SESSION['passout']) {
+                        if ($_SESSION['passout']) {//エラー文表示
                             echo $_SESSION['passout'];
                         }
                         ?>

@@ -23,36 +23,35 @@ class  Validate
         return $this->err_array;
     }
 
-    public function isset_email($email)
+    public function isset_email($email)//DB上に同じメールアドレスが存在していないか確認
     {
-        //DB上に同じメールアドレスが存在していないか確認
         $table = ' Member ';
         $column = ' email ';
         $value = [
             ':email' => $email
         ];
-        $option = ' where email=:email '; //入力した値がDB上のものと一致するか
+        $option = ' where email=:email ';
         $result = $this->pdo->select($table, $column, $value, $option);
         if ($result === true) { //入力された値が一致した場合
             return 'すでにメールアドレスが登録されています';
         }
     }
 
-    private function check_name($data)
+    private function check_name($data)//名前のエラー判定
     {
         if (empty($data['name'])) { //空白チェック
             $this->err_array['err_name'] = $this->err_empty;
             return;
         }
     }
-    private function check_question($data)
+    private function check_question($data)//秘密の質問のエラー判定
     {
         if (empty($data['question_id'])) { //空白チェック
             $this->err_array['err_question'] = '質問が未選択です';
             return;
         }
     }
-    private function check_answer($data)
+    private function check_answer($data)//秘密の質問へのエラー判定
     {
         if (empty($data['answer'])) { //空白チェック
             $this->err_array['err_answer'] = $this->err_empty;
@@ -60,7 +59,7 @@ class  Validate
         }
     }
 
-    private function check_password($data)
+    private function check_password($data)//パスワードのエラー判定
     {
         //空白チェック
         if (empty($data['password'])) { //空白チェック
@@ -81,7 +80,7 @@ class  Validate
         // }
     }
 
-    private function check_email($data)
+    private function check_email($data)//メールのエラー判定
     {
         //空白チェック
         if (empty($data['email'])) {

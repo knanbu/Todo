@@ -2,6 +2,7 @@
 require('./../lib/session.php');
 $title = 'ToDo';
 $ses = new Session();
+$ses->deleteSession();
 require_once('./../common/meta.php');
 ?>
 <html>
@@ -14,7 +15,7 @@ require_once('./../common/meta.php');
                 <div>
                     <p class="red">
                         <?php
-                        if ($_SESSION['err']) {
+                        if ($_SESSION['err']) {//エラー文表示
                             echo $_SESSION['err'];
                         } ?>
                     </p>

@@ -14,8 +14,8 @@ $data = $_POST; //ログイン画面で入力されたデータを格納
 $member_id = $_SESSION['member_id'];
 
 if ($data['password'] === $data['password_again']) {
-    $result = $change->password_update($data, $member_id);
-    header('Location:' . './../view/login.view.php');
+    $result = $change->password_update($data, $member_id);//パスワードの更新
+    header('Location:' . './../view/login.view.php');//ログイン画面に戻る
 } else {
     $_SESSION['passout'] = 'パスワードを間違えています';
     header('Location:' . './../view/pass_reregist.view.php');
