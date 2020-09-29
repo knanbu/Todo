@@ -29,11 +29,17 @@ create table Task(
     task_id int auto_increment,
     member_id int not null,
     task_name varchar(300) not null,
-    category_id int default 0,
     `priority` int,
     `start_date` date,
     limit_date date,
     comment varchar(1000),
     primary key(task_id)
+);
+
+create table TCList(
+    tc_id int auto_increment,
+    task_id int not null,
+    category_id int not null,
+    primary key(tc_id)
 );
 
