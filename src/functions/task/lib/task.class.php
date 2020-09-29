@@ -20,7 +20,7 @@ class Task
         $result = $this->pdo->select($table, $column, $value, $option);
         return $result;
     }
-    public function getCategoryList($member_id)
+    public function getCategoryList($member_id)//カテゴリーを取得
     {
         $table = ' Category ';
         $column = ' category_id,c_name ';
@@ -32,7 +32,7 @@ class Task
         return $result;
     }
 
-    public function getTask($task_id)
+    public function getTask($task_id)//タスクの取得
     {
         $table = ' Task ';
         $column = ' * ';
@@ -43,7 +43,7 @@ class Task
         $result = $this->pdo->select($table, $column, $value, $option);
         return $result;
     }
-    public function getCategoryName($category_id)
+    public function getCategoryName($category_id)//カテゴリーの名前の取得
     {
         $table = ' Category ';
         $column = ' c_name ';
@@ -55,7 +55,7 @@ class Task
         return $result;
     }
 
-    public function addCategory($data, $member_id)
+    public function addCategory($data, $member_id)//カテゴリの追加
     {
         $table = ' Category ';
         $column = ' c_name,member_id ';
@@ -103,7 +103,7 @@ class Task
         $this->pdo->delete($table, $column, $pre_value);
         return;
     }
-    public function edit_task($data) //タスクの削除
+    public function edit_task($data) //タスクの編集
     {
         $this->check_space($data);
         $table = ' Task ';
@@ -123,7 +123,7 @@ class Task
         return;
     }
 
-    public function edit_category($data)
+    public function edit_category($data)//カテゴリーの編集
     {
         $table = ' Category ';
         $column = ['c_name=:c_name'];
@@ -137,7 +137,7 @@ class Task
         return;
     }
 
-    public function delete_category()
+    public function delete_category()//カテゴリーの削除
     {
         # code...
     }

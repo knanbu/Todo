@@ -32,7 +32,7 @@ class Database
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
-    public function insert($table = '', $column = '', $value = '', $pre_value = '', $option = '') //select文の実行
+    public function insert($table = '', $column = '', $value = '', $pre_value = '', $option = '') //insert文の実行
     {
         $type = 'insert';
         $sql = $this->createSQL($type, $table, $column, $value) . $option;
@@ -41,7 +41,7 @@ class Database
         return;
     }
 
-    public function update($table = '', $column = '', $value = '', $pre_value = '', $option = '')
+    public function update($table = '', $column = '', $value = '', $pre_value = '', $option = '')//update文の実行
     {
         $type = 'update';
         $sql = $this->createSQL($type, $table, $column, $value) . $option;
@@ -49,7 +49,7 @@ class Database
         $stmt->execute($pre_value);
         return;
     }
-    public function delete($table = '', $column = '', $pre_value = '', $option = '')
+    public function delete($table = '', $column = '', $pre_value = '', $option = '')//delete文の実行
     {
         $type = 'delete';
         $sql = $this->createSQL($type, $table, $column) . $option;
