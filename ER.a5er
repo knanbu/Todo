@@ -40,7 +40,7 @@ ShowCommonAttributes=0
 
 [Entity]
 PName=NEW_ENTITY1
-LName=member
+LName=Member
 Comment=
 TableOption=
 Page=MAIN
@@ -49,17 +49,17 @@ Top=500
 Field="member_id","member_id","@INT","NOT NULL",0,"","",$FFFFFFFF,""
 Field="member_name","member_name","@VARCHAR","NOT NULL",,"","",$FFFFFFFF,""
 Field="email","email","@VARCHAR","NOT NULL",,"","",$FFFFFFFF,""
-Field="password","password","@VARCHAR","NOT NULL",,"","",$FFFFFFFF,""
+Field="pass","password","@VARCHAR","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20200907154349
+ModifiedDateTime=20200909140823
 Position="MAIN",500,500,460,397
 ZOrder=1
 
 [Entity]
 PName=NEW_ENTITY2
-LName=task
+LName=Task
 Comment=
 TableOption=
 Page=MAIN
@@ -72,12 +72,11 @@ Field="category_id","category_id","@INT",,,"0","",$FFFFFFFF,""
 Field="priority","priority","@INT",,,"0","",$FFFFFFFF,""
 Field="start_date","start_date","@DATE",,,"null","",$FFFFFFFF,""
 Field="limit_date","limit_date","@DATE",,,"null","",$FFFFFFFF,""
-Field="delete_flg","delete_flg","@INT","NOT NULL",,"0","",$FFFFFFFF,""
 Field="comment","comment","@VARCHAR",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20200907165854
+ModifiedDateTime=20200909140834
 Position="MAIN",1400,500,404,497
 ZOrder=2
 
@@ -104,24 +103,24 @@ ZOrder=3
 
 [Entity]
 PName=NEW_ENTITY3
-LName=question
+LName=Question
 Comment=
 TableOption=
 Page=MAIN
 Left=1400
 Top=1100
 Field="question_id","question_id","@INT","NOT NULL",0,"","",$FFFFFFFF,""
-Field="q_contents","question_name","@VARCHAR",,,"","",$FFFFFFFF,""
+Field="q_content","question_name","@VARCHAR",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20200907153629
+ModifiedDateTime=20200909140904
 Position="MAIN",1400,1100,392,393
 ZOrder=5
 
 [Entity]
 PName=NEW_ENTITY4
-LName=answer
+LName=Answer
 Comment=
 TableOption=
 Page=MAIN
@@ -134,26 +133,24 @@ Field="a_content","a_content","@VARCHAR","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20200907154119
+ModifiedDateTime=20200909140856
 Position="MAIN",500,1100,460,379
 ZOrder=6
 
 [Entity]
 PName=NEW_ENTITY5
-LName=category
+LName=Category
 Comment=
 TableOption=
 Page=MAIN
 Left=2100
 Top=500
 Field="category_id","category_id","@INT","NOT NULL",0,"","",$FFFFFFFF,""
-Field="task_id","task_id","@INT","NOT NULL",,"","",$FFFFFFFF,""
-Field="member_id","member_id","@INT","NOT NULL",,"","",$FFFFFFFF,""
-Field="c_name","c_name","@VARCHAR",,,"","",$FFFFFFFF,""
+Field="c_name","c_name","@VARCHAR","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20200908141537
+ModifiedDateTime=20200909142306
 Position="MAIN",2100,500,413,471
 ZOrder=7
 
@@ -200,22 +197,22 @@ TermPos2=R
 ZOrder=11
 
 [Relation]
-Entity1=NEW_ENTITY2
-Entity2=NEW_ENTITY5
-RelationType1=2
+Entity1=NEW_ENTITY5
+Entity2=NEW_ENTITY2
+RelationType1=1
 RelationType2=3
-Fields1=task_id
-Fields2=task_id
+Fields1=category_id
+Fields2=category_id
 Cardinarity1=
 Cardinarity2=
-Position="MAIN",0,2632,7368,2777,R,R,""
+Position="MAIN",0,2716,5736,2574,R,R,""
 Dependence=0
 Caption=
 PName=
 LineMode=0
-Bar1=263
-Bar2=737
-Bar3=278
+Bar1=272
+Bar2=574
+Bar3=257
 TermPos1=R
 TermPos2=R
-ZOrder=13
+ZOrder=14
