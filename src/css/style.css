@@ -1,0 +1,320 @@
+@charset "UTF-8";
+
+/* 共通部分 */
+html {
+  font-size: 100%;
+}
+
+body {
+  font-family: "Yu Gothic Medium", "游ゴシック", "YuGothic", "游ゴシック体",
+    "ヒラギノ角ゴ Pro M3", "sans-serif";
+  line-height: 1.7;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: rgb(241, 145, 28);
+}
+
+img {
+  max-width: 100%;
+}
+
+input {
+  width: auto;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px #fff solid;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+input[type="submit"],
+input[type="button"] {
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  text-align: center;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+  border-radius: 10px;
+  width: 20px;
+  height: 20px;
+}
+
+input[type="checkbox"]:checked {
+  content: "\f046";
+}
+
+select {
+  width: auto;
+  max-width: 400;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px #fff solid;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* 共有クラス */
+form div {
+  margin-top: 20;
+}
+
+.button {
+  font-size: 1.2rem;
+  height: 50px;
+}
+
+.button:hover {
+  background-color: rgb(241, 145, 28);
+}
+
+.center {
+  text-align: center;
+}
+
+.red {
+  color: red;
+}
+
+.three-point {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* ヘッダー */
+header {
+  width: 100%;
+  background-color: rgb(248, 229, 167);
+}
+
+.header img {
+  width: 50px;
+  min-width: 50px;
+}
+
+.header h2 {
+  margin-bottom: 0;
+}
+
+/* フッター */
+.footer {
+  padding: 10px;
+}
+
+/* ログイン */
+.login-box {
+  min-width: 250;
+  min-height: 250;
+  margin: 10% 25%;
+  border-radius: 10px;
+  box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.5);
+  /* 背景色は後で変更 */
+  background-color: rgb(248, 229, 167);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* アカウント登録画面 */
+.regist-box {
+  background-color: rgb(248, 229, 167);
+  box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  min-width: 600px;
+  min-height: 600;
+  margin: 10% 20%;
+}
+
+.regist-box h2 {
+  text-align: center;
+  padding: 20px;
+  margin: 0;
+}
+
+.regist-box form {
+  padding: 20px;
+  min-width: 600px;
+  margin: 0 0 40px 0;
+}
+
+.regist-box form select {
+  width: 217px;
+}
+
+.grid-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 30px;
+  text-align: center;
+}
+
+.grid-form div {
+  margin-top: 0;
+}
+
+/* タスク一覧画面 */
+.task-box {
+  display: flex;
+  flex-direction: row;
+}
+
+/* タスク一覧画面サイドバー */
+.sidebar {
+  width: 230px;
+  height: 100%;
+  min-width: 230px;
+  min-height: 100vh;
+  background-color: antiquewhite;
+}
+
+.add-button {
+  margin: 30px 50px 15px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  font-size: 3em;
+  font-weight: bold;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  border: rgba(0, 0, 0, 0.562) 1px solid;
+  background-color: rgb(248, 229, 167);
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.719);
+}
+
+.category {
+  width: 230px;
+  height: 500px;
+  padding-top: 1px;
+}
+
+.category-item {
+  line-height: 2.5;
+  padding: 0 20;
+}
+
+.category-item button {
+  background-color: antiquewhite;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.category-item div {
+  margin-top: 15px;
+  border-radius: 20;
+}
+
+.category-item button:hover {
+  background-color: rgb(245, 221, 142);
+  color: black;
+}
+.category-item-detail {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* タスクメイン画面 */
+.task-show {
+  width: 100%;
+  height: 100%;
+  min-width: 600px;
+  min-height: 100vh;
+  background-color: rgba(255, 255, 255, 0.918);
+}
+
+.task-list {
+  margin: 30 0 20 20;
+  background-color: #fff;
+  width: auto;
+  height: 50px;
+  box-shadow: 2px 1px 5px 2px rgba(0, 0, 0, 0.5);
+  font-size: 1.5rem;
+  padding-top: 5px;
+  list-style: none;
+}
+
+.task-item {
+  margin: 10px 15px;
+}
+
+/* タスク新規登録 */
+.add-task-box {
+  width: 700;
+  min-height: 400;
+  margin: 10% 25%;
+  border-radius: 10px;
+  box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.5);
+  /* 背景色は後で変更 */
+  background-color: rgb(248, 229, 167);
+  padding-top: 10px;
+}
+
+.add-task-box h2,
+.add-task-box p {
+  text-align: center;
+  margin: 0;
+}
+
+.task-form {
+  gap: 20px;
+  text-align: left;
+  margin: 20 0 40 0;
+}
+
+/* タスク削除 */
+.delete-button {
+  margin: 40 0 0 60;
+}
+
+.delete-button input[type="submit"] {
+  border: 2px solid #666666;
+  font-size: 1.25rem;
+  background-color: #fff;
+}
+
+.delete-button input[type="submit"]:hover {
+  background-color: rgb(172, 169, 165);
+}
+
+/* タスク編集 */
+.edit-box {
+  display: flex;
+  flex-direction: row;
+}
+
+.old-task {
+  width: 400;
+  height: 400;
+  margin: 50px;
+  border-radius: 10px;
+  box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.5);
+  padding-top: 10px;
+  background-color: aliceblue;
+}
+
+.new-task {
+  width: 400px;
+  height: auto;
+  margin: 50px;
+  border-radius: 10px;
+  box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.5);
+  padding: 10px 0 15px 20px;
+  background-color: bisque;
+}
+
+.edit-form div {
+  margin: 20 0 10 0;
+}
