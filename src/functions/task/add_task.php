@@ -11,14 +11,14 @@ $err = new TaskError();
 
 $member_id = $_SESSION['member_id']; //会員情報
 $data = $_POST;
-unset($data['add']);
+unset($data['add']);//いらないもの削除
 
 if ($_POST['add_category']) { //カテゴリーの追加が行われたとき
     unset($data['add_category']);
     $task->addCategory($data, $member_id); //カテゴリーの追加
     $_SESSION['add_category'] = '新しいカテゴリーが追加されました';
 }
-$errArray = $err->err_check($data);
+$errArray = $err->err_check($data);//エラー判定
 if (!empty($errArray)) { //エラーがある場合
     $_SESSION['err_task'] = $errArray;
     header('Location:' . './../view/add_task.view.php');

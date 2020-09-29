@@ -72,16 +72,42 @@ class Task
     {
         $this->check_space($data);
         $table = ' Task ';
-        $column = '  member_id,task_name,category_id,priority,start_date,limit_date,comment ';
-        $value = ' :member_id,:task_name,:category_id,:priority,:start_date,:limit_date,:comment ';
+        $column = '  member_id,task_name,priority,start_date,limit_date,comment ';
+        $value = ' :member_id,:task_name,:priority,:start_date,:limit_date,:comment ';
         $pre_value = [
             ':member_id' => $member_id,
             ':task_name' => $data['task_name'],
-            ':category_id' => $data['category_id'],
             ':priority' => $data['priority'],
             ':start_date' => $data['start_date'],
             ':limit_date' => $data['limit_date'],
             ':comment' => $data['comment']
+        ];
+        $this->pdo->insert($table, $column, $value, $pre_value);
+        $task_id=$this->get_task_id($member_id);//会員のタスクIDの中で一番最新のものを取得
+        $this->addTC_table($task_id[0]["max(task_id)"],$data);//タスクとカテゴリーの中間テーブルへの追加
+        return;
+    }
+
+    private function get_task_id($member_id)//会員のタスクIDの中で一番最新のものを取得
+    {
+        $table = ' Task ';
+        $column = ' max(task_id) ';
+        $value = [
+            ':member_id' => $member_id,
+        ];
+        $option = ' where member_id=:member_id ';
+        $result = $this->pdo->select($table, $column, $value, $option);
+        return $result;
+    }
+
+    private function addTC_table($task_id,$data)//タスクとカテゴリーの中間テーブルへの追加
+    {
+        $table = ' TCList ';
+        $column = '  task_id,category_id ';
+        $value = ' :task_id,:category_id ';
+        $pre_value = [
+            ':task_id' => $task_id,
+            ':category_id' => $data['category_id']
         ];
         $this->pdo->insert($table, $column, $value, $pre_value);
         return;
