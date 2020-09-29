@@ -9,6 +9,7 @@ create table Member(
 );
 create table Category(
     category_id int auto_increment,
+    member_id int not null,
     c_name varchar(100) not null,
     primary key(category_id)
 );
