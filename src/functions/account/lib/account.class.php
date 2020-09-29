@@ -19,10 +19,22 @@ class Account
             ':email' => "{$data['email']}",
             ':pass' => "{$data['password']}"
         ];
-        $result = $this->pdo->insert($table, $column, $value, $pre_value);
+        $this->pdo->insert($table, $column, $value, $pre_value);
         $member_id = $this->get_member_id($data['email']); //valueが違うので明日はこの部分の手直し
         $this->answer_regist($data, $member_id); //秘密の質問登録
         return;
+    }
+    private function defaultCategoryInsert($member_id)
+    {
+        $table=' Category ';
+        $column = 'member_id,c_name ';
+        $value = ' :member_id , :c_name ';
+        $pre_value = [
+            ':member_id' => $member_id,
+            ':c_name' => "すべて"
+        ];
+        $result = $this->pdo->insert($table, $column, $value, $pre_value);
+
     }
 
     public function get_member_id($email)
