@@ -3,6 +3,7 @@ require('./../lib/model.php');
 require('lib/task.class.php');
 require('lib/validate.class.php');
 require('./../lib/session.php');
+
 $ses = new Session();
 $pdo = new Database(); //データベース接続
 $task = new Task($pdo);
@@ -15,8 +16,8 @@ unset($data['add']);
 if ($_POST['add_category']) { //カテゴリーの追加が行われたとき
     unset($data['add_category']);
     $task->addCategory($data, $member_id); //カテゴリーの追加
+    $_SESSION['add_category'] = '新しいカテゴリーが追加されました';
 }
-
 $errArray = $err->err_check($data);
 if (!empty($errArray)) { //エラーがある場合
     $_SESSION['err_task'] = $errArray;

@@ -36,7 +36,7 @@ require_once('./../common/meta.php');
         <div class="center">
             <input type="submit" class="button" name="confirm" value="次へ">
             </form>
-            <p><a href="acc_check.php">新規アカウント登録</a></p>
+            <p><a href="regist_acc.view.php">新規アカウント登録</a></p>
             <p><a href="login.view.php">戻る</a></p>
         </div>
     </div>

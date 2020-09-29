@@ -10,5 +10,6 @@ $err = new TaskError();
 
 $data = $_POST;
 unset($data['delete']);
-$task->delete_task($data['task_id']);
+$task_id = implode(',', $data['task_id']);
+$task->delete_task($task_id);
 header('Location:' . './../view/task_show.view.php');

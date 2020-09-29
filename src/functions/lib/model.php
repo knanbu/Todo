@@ -72,7 +72,14 @@ class Database
                 break;
 
             case 'update':
-                $sql = "update {$table} set {$column}={$value}";
+                $sql = "update {$table} set ";
+                foreach ($column as $key => $item) {
+                    if ($key === 0) {
+                        $sql .= $item;
+                    } else {
+                        $sql .= ',' . $item;
+                    }
+                }
                 break;
 
             case 'delete':

@@ -22,26 +22,50 @@ class Task
     }
     public function getCategoryList($member_id)
     {
-        $table = ' Task as t ';
-        $column = ' c.c_name';
+        $table = ' Category ';
+        $column = ' category_id,c_name ';
         $value = [
-            ':member_id' => $member_id,
+            ':member_id' => $member_id
         ];
-        $option = ' join Category as c on t.category_id=c.category_id where member_id=1 group by t.category_id';
+        $option = ' where member_id = :member_id group by category_id order by category_id ';
         $result = $this->pdo->select($table, $column, $value, $option);
         return $result;
     }
+
+    public function getTask($task_id)
+    {
+        $table = ' Task ';
+        $column = ' * ';
+        $value = [
+            ':task_id' => $task_id,
+        ];
+        $option = ' where task_id=:task_id ';
+        $result = $this->pdo->select($table, $column, $value, $option);
+        return $result;
+    }
+    public function getCategoryName($category_id)
+    {
+        $table = ' Category ';
+        $column = ' c_name ';
+        $value = [
+            ':category_id' => $category_id,
+        ];
+        $option = ' where category_id=:category_id ';
+        $result = $this->pdo->select($table, $column, $value, $option);
+        return $result;
+    }
+
     public function addCategory($data, $member_id)
     {
-        $table=' Category ';
-        $column=' * ';
-        $value='';
-        $pre_value=[
-            ':member_id'=>$member_id,
-            'c_name'=>$data['category_name'];
+        $table = ' Category ';
+        $column = ' c_name,member_id ';
+        $value = ' :c_name, :member_id ';
+        $pre_value = [
+            ':member_id' => $member_id,
+            ':c_name' => $data['c_name']
         ];
-        $option='';
-        $this->pdo->insert($table, $column, $value, $option);
+        $this->pdo->insert($table, $column, $value, $pre_value);
+        return;
     }
 
     public function addTask($data, $member_id) //タスクの新規登録
@@ -64,13 +88,58 @@ class Task
     }
     public function delete_task($task_id) //タスクの削除
     {
+
         $table = ' Task ';
-        $column = ' task_id in (:task_id)  ';
-        $pre_value = [
-            ':task_id' => $task_id
-        ];
+        $column = ' ';
+        $pre_value = [];
+        foreach ($task_id as $key => $value) {
+            $pre_value[":task_id{$key}"] = $value;
+            if ($key !== count($task_id) - 1) {
+                $column .= " task_id=:task_id{$key} or ";
+            } else {
+                $column .= " task_id=:task_id{$key} ";
+            }
+        }
         $this->pdo->delete($table, $column, $pre_value);
         return;
+    }
+    public function edit_task($data) //タスクの削除
+    {
+        $this->check_space($data);
+        $table = ' Task ';
+        $column = ['task_name=:task_name', 'priority=:priority', 'category_id=:category_id', 'comment=:comment', 'start_date=:start_date', 'limit_date=:limit_date'];
+        $value = '';
+        $pre_value = [
+            ":task_id" => (int)$data['task_id'],
+            ":task_name" => $data['task_name'],
+            ":priority" => $data['priority'],
+            ":category_id" => $data['category_id'],
+            ":comment" => $data['comment'],
+            ":start_date" => $data['start_date'],
+            ":limit_date" => $data['limit_date']
+        ];
+        $option = ' where task_id=:task_id';
+        $this->pdo->update($table, $column, $value, $pre_value, $option);
+        return;
+    }
+
+    public function edit_category($data)
+    {
+        $table = ' Category ';
+        $column = ['c_name=:c_name'];
+        $value = '';
+        $pre_value = [
+            ":category_id" => (int)$data['category_id'],
+            ":c_name" => $data['c_name']
+        ];
+        $option = ' where category_id=:category_id';
+        $this->pdo->update($table, $column, $value, $pre_value, $option);
+        return;
+    }
+
+    public function delete_category()
+    {
+        # code...
     }
     private function check_space(&$data) //空白をnullに変える
     {

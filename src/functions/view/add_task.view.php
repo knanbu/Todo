@@ -3,7 +3,8 @@ require('./../lib/session.php');
 $ses = new Session();
 $title = 'タスクの登録';
 require_once('./../common/meta.php');
-unset($_SESSION['err_task']);
+require_once('./../task/show_category.php');
+
 ?>
 <html>
 
@@ -55,18 +56,26 @@ unset($_SESSION['err_task']);
                     <label>カテゴリー</label>
                     <select name="category_id">
                         <option value="">未選択</option>
-                        <option value="1">すべて</option>
+                        <?php
+                        for ($i = 0; $i < count($category_list); $i++) {
+                        ?>
+                            <option value="<?php echo $category_list[$i]['category_id'] ?>"><?php echo $category_list[$i]['c_name']; ?></option>
+                        <?php } ?>
                     </select>
                 </div>
                 <div>
-                    <form action="./../task/add_task.php" method="post">
-                        <input type="text" name="category_name" placeholder="カテゴリーの追加">
-                        <input type="submit" name="add_category">
-                    </form>
+                    <p class="red">
+                        <?php
+                        if ($_SESSION['add_category']) {
+                            echo $_SESSION['add_category'];
+                        } ?>
+                    </p>
+                    <input type="text" name="c_name" placeholder="カテゴリーの追加">
+                    <input type="submit" name="add_category" value="追加">
                 </div>
                 <div>
-                    <span>&nbsp</span>
-                    <input type="text" name="comment" placeholder="メモ"><br>
+                    <span>メモ</span>
+                    <input type="text" name="comment"><br>
                 </div>
                 <div></div>
                 <div>

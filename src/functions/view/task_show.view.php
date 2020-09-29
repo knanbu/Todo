@@ -4,7 +4,6 @@ $session = new Session();
 $title = 'タスク一覧';
 require_once('./../common/meta.php');
 require('./../task/task_show.php');
-
 ?>
 <html>
 
@@ -20,20 +19,23 @@ require('./../task/task_show.php');
             </div>
             <div class="category">
                 <div class="category-item">
-                    <ul>
-                        <?php
-                        for ($i = 0; $i <= count($category_list) - 1; $i++) {
-                        ?>
-                            <li>
-                                <a href="">
-                                    <?php echo $category_list[$i]['c_name']; ?>
-                                </a>
-                            </li>
-                        <?php
-                        }
-                        ?>
-                    </ul>
-                </div>
+                    <?php
+                    for ($i = 0; $i <= count($category_list) - 1; $i++) {
+                    ?>
+                        <div class="category-item-detail">
+                            <button><?php echo $category_list[$i]['c_name']; ?></button>
+
+                            <a href="edit_category.view.php?category_id=<?php echo $category_list[$i]['category_id'] ?>">
+                                <button class="three-point">&#8942; &nbsp 削除</button>
+                            </a>
+                            <a href="edit_category.view.php?category_id=<?php echo $category_list[$i]['category_id'] ?>">
+                                <button class="three-point">編集</button>
+                            </a>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                </div><!-- category-item-->
             </div>
             <div class="center ">
                 <p><a href="">アカウント設定</a></p>
@@ -54,12 +56,12 @@ require('./../task/task_show.php');
                     if (!empty($task_list)) { //タスクがある場合リストを表示
                         for ($j = 0; $j <= count($task_list) - 1; $j++) {
                     ?>
-                            <li class="task-list">
-                                <label>
+                            <a href="./../view/task_edit.view.php?task_id=<?php echo $task_list[$j]['task_id']; ?>">
+                                <li class="task-list">
                                     <input class="task-item" type="checkbox" name="task_id[]" value="<?php echo $task_list[$j]['task_id'] ?>">
                                     <span class=" task-item"><?php echo $task_list[$j]['task_name']; ?></span>
-                                </label>
-                            </li>
+                                </li>
+                            </a>
                     <?php
                         }
                     }
