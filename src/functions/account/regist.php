@@ -17,6 +17,7 @@ if (empty($err_array)) { //エラーがなければアカウント登録開始
     if ($result === null) {//メールが一つも存在していない場合
         $acc->regist_account($data);//アカウント登録開始
         $_SESSION['member_id']=$acc->get_member_id($data['email']);
+        $_SESSION['complete']='complete';
         header('Location:' . './../view/task_show.view.php'); //タスク一覧画面へ進む
     } else {
         $_SESSION['err'] = $err_array;

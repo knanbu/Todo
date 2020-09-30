@@ -66,4 +66,14 @@ class Account
         $result = $this->pdo->insert($table, $column, $value, $pre_value);
         return;
     }
+
+    public function show_name($member_id)
+    {
+        $table=' Member ';
+        $column=' member_name ';
+        $value=[':member_id'=>$member_id];
+        $option=' where member_id=:member_id';
+        $result=$this->pdo->select($table,$column,$value,$option);
+        return $result;
+    }
 }
