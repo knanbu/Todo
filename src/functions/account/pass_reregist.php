@@ -15,6 +15,7 @@ $member_id = $_SESSION['member_id'];
 
 if ($data['password'] === $data['password_again']) {
     $result = $change->password_update($data, $member_id);//パスワードの更新
+    unset($_SESSION['passout']);
     header('Location:' . './../view/login.view.php');//ログイン画面に戻る
 } else {
     $_SESSION['passout'] = 'パスワードを間違えています';

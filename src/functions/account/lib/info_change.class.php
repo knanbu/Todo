@@ -24,14 +24,14 @@ class Info_change
     {
         $password = password_hash($data['password'], PASSWORD_DEFAULT);//パスワードのハッシュ化
         $table = ' Member ';
-        $column = ' pass ';
-        $value = ' :password ';
+        $column = ['pass=:password'];
+        $value = ' ';
         $pre_value = [
-            ':password' => "{$password}",
-            ':member_id' => "{$member_id}"
+            ':password' => $password,
+            ':member_id' => (int)$member_id
         ];
-        $option = 'where member_id=:member_id';
+        $option = ' where member_id=:member_id ';
         $result = $this->pdo->update($table, $column, $value, $pre_value, $option);
-        return $result;
+        return;
     }
 }
