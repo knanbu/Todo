@@ -45,7 +45,7 @@ class Account
         $value = [':email' => $email];
         $option = ' where email=:email';
         $result = $this->pdo->select($table, $column, $value, $option);
-        return $result;
+        return $result[0]['member_id'];
     }
 
     private function pass_hash($data) //パスワードのハッシュ化
@@ -61,7 +61,7 @@ class Account
         $pre_value = [
             ':question_id' => $data['question_id'],
             ':member_id' => $member_id,
-            ':a_content' => "{$data['answer']}"
+            ':a_content' => $data['answer']
         ];
         $result = $this->pdo->insert($table, $column, $value, $pre_value);
         return;

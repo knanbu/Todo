@@ -15,6 +15,7 @@ $err_array = $err->err_check($data);
 if (empty($err_array)) { //エラーがなければアカウント登録開始
     $result = $err->isset_email($data['email']);//メールがすでにDB上に存在しているかチェック
     if ($result === null) {//メールが一つも存在していない場合
+        unset($_SESSION['err']);//エラー文削除
         $acc->regist_account($data);//アカウント登録開始
         $_SESSION['member_id']=$acc->get_member_id($data['email']);
         $_SESSION['complete']='complete';

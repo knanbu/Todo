@@ -50,6 +50,7 @@ require('./../task/task_show.php');
         <div class="task-show">
         <?php if ($_SESSION['complete']) {
             echo "<h2>{$member_name[0]['member_name']}さんのアカウント登録が完了しました </h2>";
+            unset($_SESSION['complete']);
         }?>
         <h3>こんにちは、<?php echo $member_name[0]['member_name']?>さん</h3>
             <form action="./../task/delete_task.php" method="post">
