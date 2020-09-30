@@ -52,7 +52,7 @@ require_once('./../task/show_category.php');
                         <?php
                         for ($i = 1; $i < count($category_list); $i++) {
                         ?>
-                            <input type="checkbox" id="<?php echo $category_list[$i]['category_id'] ?>" name="category_id" value="<?php echo $category_list[$i]['category_id'] ?>">
+                            <input type="checkbox" id="<?php echo $category_list[$i]['category_id'] ?>" name="category_id[]" value="<?php echo $category_list[$i]['category_id'] ?>">
                             <label for="<?php echo $category_list[$i]['category_id'] ?>">
                                 <?php echo $category_list[$i]['c_name']; ?>
                             </label>
@@ -82,18 +82,18 @@ require_once('./../task/show_category.php');
 
         <!--カテゴリー追加-->
         <div class="edit-box">
-            <form action="./../task/add_task.php" method="post">
+            <form action="./../task/add_category.php" method="post">
                 <div class="new-task">
                     <h2>カテゴリーの追加</h2>
                     <div class="edit-form task-form">
                         <p class="red">
                             <?php
-                            if ($_SESSION['add_category']) {//追加に成功した場合
+                            if ($_SESSION['add_category']) { //追加に成功した場合
                                 echo $_SESSION['add_category'];
-                            } elseif ($_SESSION['err_category']) {//空白の場合
+                            } elseif ($_SESSION['err_category']) { //空白の場合
                                 echo $_SESSION['err_category'];
                             }
-                             ?>
+                            ?>
                         </p>
                         <input type="text" name="c_name" placeholder="カテゴリーの追加">
                         <input type="submit" name="add_category" value="追加">

@@ -12,26 +12,17 @@ $err = new TaskError();
 $member_id = $_SESSION['member_id']; //会員情報
 $data = $_POST;
 
-if ($data['add_category']&&!empty($data['c_name'])) { //カテゴリーの追加が行われたとき
-    unset($data['add_category']);
-    unset($_SESSION['err_category']);
-    $task->addCategory($data, $member_id); //カテゴリーの追加
-    $_SESSION['add_category'] = '新しいカテゴリーが追加されました';
-    header('Location:' . './../view/add_task.view.php');
-}else{//エラーの場合
-    unset($_SESSION['add_category']);
-    $_SESSION['err_category']='空白です';
-    header('Location:' . './../view/add_task.view.php');
-}
+
 if ($data['add']) {//タスクが追加されたとき
     unset($data['add']);
     $errArray = $err->err_check($data);
+    var_dump($errArray);
     if (!empty($errArray)) { //エラーがある場合
         $_SESSION['err_task'] = $errArray;
-        header('Location:' . './../view/add_task.view.php');
+        // header('Location:' . './../view/add_task.view.php');
     } else { //成功の場合
         $task->addTask($data, $member_id); //タスクの新規登録
         unset($_SESSION['err_task']);
-        header('Location:' . './../view/task_show.view.php');
+        // header('Location:' . './../view/task_show.view.php');
     }
 }
