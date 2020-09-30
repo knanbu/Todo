@@ -30,6 +30,7 @@ services:
     volumes:
       # MySQLの設定ファイル
       - ./mysql/mysql_conf:/etc/mysql/conf.d
+      - ./mysql/db:/var/lib/mysql
     networks:
       - todo
 

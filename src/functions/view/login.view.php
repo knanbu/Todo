@@ -2,6 +2,7 @@
 require('./../lib/session.php');
 $title = 'ToDo';
 $ses = new Session();
+$ses->deleteSession();
 require_once('./../common/meta.php');
 ?>
 <html>

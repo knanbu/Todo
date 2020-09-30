@@ -10,12 +10,12 @@ $session = new Session();
 unset($_POST['login']); //必要のない情報を破棄
 $data = $_POST; //ログイン画面で入力されたデータを格納
 $result = $login->login($data); //ログイン
-if (!empty($result)) { //成功時
+if (!empty($result)) { //ログイン成功時
     unset($_SESSION['err']); //エラーメッセージ削除
     $_SESSION['member_id'] = $result[0]['member_id'];
-    header('Location:' . './../view/task_show.view.php');
+    header('Location:' . './../view/task_show.view.php');//タスク一覧画面に移動
     exit;
-} else { //失敗時
+} else { //ログインエラーがあったとき
     $err_log = 'メールアドレス、またはパスワードが違います';
     $_SESSION['err_login'] = $err_log;
     header('Location:' . './../view/login.view.php');

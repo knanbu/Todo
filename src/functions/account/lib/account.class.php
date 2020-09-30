@@ -8,7 +8,7 @@ class Account
         $this->pdo = $db;
     }
 
-    public function regist_account($data)
+    public function regist_account($data)//アカウントの登録
     {
         $data['password'] = $this->pass_hash($data); //パスワードのハッシュ化
         $table = ' Member ';
@@ -19,13 +19,26 @@ class Account
             ':email' => "{$data['email']}",
             ':pass' => "{$data['password']}"
         ];
-        $result = $this->pdo->insert($table, $column, $value, $pre_value);
-        $member_id = $this->get_member_id($data['email']); //
-        $this->answer_regist($data, $member_id[0]['member_id']); //秘密の質問登録
+        $this->pdo->insert($table, $column, $value, $pre_value);
+        $member_id = $this->get_member_id($data['email']); //valueが違うので明日はこの部分の手直し
+        $this->answer_regist($data, $member_id); //秘密の質問登録
+        $this->defaultCategoryInsert($member_id); //各アカウントごとのデフォルトのカテゴリー追加
+        return;
+    }
+    private function defaultCategoryInsert($member_id) //各アカウントごとのデフォルトのカテゴリー追加
+    {
+        $table = ' Category ';
+        $column = 'member_id,c_name ';
+        $value = ' :member_id , :c_name ';
+        $pre_value = [
+            ':member_id' => $member_id,
+            ':c_name' => "すべて"
+        ];
+        $this->pdo->insert($table, $column, $value, $pre_value);
         return;
     }
 
-    public function get_member_id($email)
+    public function get_member_id($email) //アカウントID取得
     {
         $table = ' Member ';
         $column = ' member_id ';
@@ -35,13 +48,12 @@ class Account
         return $result;
     }
 
-    private function pass_hash($data)
+    private function pass_hash($data) //パスワードのハッシュ化
     {
         return password_hash($data['password'], PASSWORD_DEFAULT);
     }
 
-
-    private function answer_regist($data, $member_id)
+    private function answer_regist($data, $member_id) //秘密の質問の答えの登録
     {
         $table = ' Answer ';
         $column = ' question_id, member_id, a_content ';
@@ -53,5 +65,15 @@ class Account
         ];
         $result = $this->pdo->insert($table, $column, $value, $pre_value);
         return;
+    }
+
+    public function show_name($member_id)
+    {
+        $table=' Member ';
+        $column=' member_name ';
+        $value=[':member_id'=>$member_id];
+        $option=' where member_id=:member_id';
+        $result=$this->pdo->select($table,$column,$value,$option);
+        return $result;
     }
 }

@@ -44,3 +44,7 @@ create table TCList(
     primary key(tc_id)
 );
 
+ALTER USER 'user1'@'%' IDENTIFIED WITH mysql_native_password BY 'pass';
+
+insert into Category (c_name)values('すべて');
+insert into Question(q_content)values('小学校の名前は？');

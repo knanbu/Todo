@@ -3,6 +3,7 @@ require('./../lib/session.php');
 $session = new Session();
 $title = 'タスク一覧';
 require_once('./../common/meta.php');
+
 require('./../task/task_show.php');
 ?>
 <html>
@@ -47,6 +48,10 @@ require('./../task/task_show.php');
 
         <!-- タスク一覧画面 -->
         <div class="task-show">
+        <?php if ($_SESSION['complete']) {
+            echo "<h2>{$member_name[0]['member_name']}さんのアカウント登録が完了しました </h2>";
+        }?>
+        <h3>こんにちは、<?php echo $member_name[0]['member_name']?>さん</h3>
             <form action="./../task/delete_task.php" method="post">
                 <div class="delete-button">
                     <input type="submit" name="delete" value="削除">

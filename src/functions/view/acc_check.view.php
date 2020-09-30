@@ -15,7 +15,7 @@ require_once('./../common/meta.php');
                 <div>
                     <p class="red">
                         <?php
-                        if ($_SESSION['no_account']) {
+                        if ($_SESSION['no_account']) {//エラー文表示
                             echo $_SESSION['no_account'];
                         }
                         ?>
