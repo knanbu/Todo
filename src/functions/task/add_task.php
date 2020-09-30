@@ -16,13 +16,12 @@ $data = $_POST;
 if ($data['add']) {//タスクが追加されたとき
     unset($data['add']);
     $errArray = $err->err_check($data);
-    var_dump($errArray);
     if (!empty($errArray)) { //エラーがある場合
         $_SESSION['err_task'] = $errArray;
-        // header('Location:' . './../view/add_task.view.php');
+        header('Location:' . './../view/add_task.view.php');
     } else { //成功の場合
         $task->addTask($data, $member_id); //タスクの新規登録
         unset($_SESSION['err_task']);
-        // header('Location:' . './../view/task_show.view.php');
+        header('Location:' . './../view/task_show.view.php');
     }
 }

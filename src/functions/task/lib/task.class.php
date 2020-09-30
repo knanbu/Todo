@@ -55,14 +55,14 @@ class Task
         return $result;
     }
 
-    public function addCategory($data, $member_id)//カテゴリの追加
+    public function addCategory($c_name, $member_id)//カテゴリの追加
     {
         $table = ' Category ';
         $column = ' c_name,member_id ';
         $value = ' :c_name, :member_id ';
         $pre_value = [
             ':member_id' => $member_id,
-            ':c_name' => $data['c_name']
+            ':c_name' => $c_name
         ];
         $this->pdo->insert($table, $column, $value, $pre_value);
         return;
@@ -84,7 +84,7 @@ class Task
         ];
         $this->pdo->insert($table, $column, $value, $pre_value);
         $task_id=$this->get_task_id($member_id);//会員のタスクIDの中で一番最新のものを取得
-        $this->addTC_table($task_id[0]["max(task_id)"],$data);//タスクとカテゴリーの中間テーブルへの追加
+        $this->addTC_table($member_id,$task_id[0]["max(task_id)"],$data);//タスクとカテゴリーの中間テーブルへの追加
         return;
     }
 
@@ -100,21 +100,44 @@ class Task
         return $result;
     }
 
-    private function addTC_table($task_id,$data)//タスクとカテゴリーの中間テーブルへの追加
+    private function addTC_table($member_id,$task_id,$data)//タスクとカテゴリーの中間テーブルへの追加
     {
+        $this->addTC_table_default($task_id,$member_id);
+        foreach ($data['category_id'] as  $category_id) {
+            $table = ' TCList ';
+            $column = '  task_id,category_id ';
+            $value = ' :task_id,:category_id ';
+            $pre_value = [
+                ':task_id' => $task_id,
+                ':category_id' => (int)$category_id
+            ];
+            $this->pdo->insert($table, $column, $value, $pre_value);
+        }
+        return;
+    }
+
+    private function addTC_table_default($task_id,$member_id)//
+    {
+        $category_list=$this->getCategoryList($member_id);
+        $index = '';
+        foreach ($category_list as $key => $value) {
+            if ($value['c_name'] === 'すべて') { //カテゴリーのすべての項目はデフォルト値を探す
+                $index = $key;
+            }
+        }
+        $category_id=$category_list[$index]['category_id'];//カテゴリーの「すべて」
         $table = ' TCList ';
         $column = '  task_id,category_id ';
         $value = ' :task_id,:category_id ';
         $pre_value = [
             ':task_id' => $task_id,
-            ':category_id' => $data['category_id']
+            ':category_id' => $category_id
         ];
         $this->pdo->insert($table, $column, $value, $pre_value);
         return;
     }
     public function delete_task($task_id) //タスクの削除
     {
-        
         $table = ' Task ';
         $column = ' ';
         $pre_value = [];
