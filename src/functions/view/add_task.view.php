@@ -50,7 +50,7 @@ require_once('./../task/show_category.php');
                         <label>カテゴリー</label>
                         <select name="category_id">
                             <?php
-                            for ($i = 0; $i < count($category_list); $i++) {
+                            for ($i = 1; $i < count($category_list); $i++) {
                             ?>
                                 <option value="<?php echo $category_list[$i]['category_id'] ?>"><?php echo $category_list[$i]['c_name']; ?></option>
                             <?php } ?>
