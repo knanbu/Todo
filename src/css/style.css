@@ -221,6 +221,7 @@ header {
   background-color: rgb(245, 221, 142);
   color: black;
 }
+
 .category-item-detail {
   display: flex;
   justify-content: space-between;
@@ -251,10 +252,14 @@ header {
 }
 
 /* タスク新規登録 */
+.add-box {
+  display: flex;
+  flex-direction: row;
+  margin: 40 15% 40;
+}
+
 .add-task-box {
-  width: 700;
-  min-height: 400;
-  margin: 10% 25%;
+  min-width: 550px;
   border-radius: 10px;
   box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.5);
   /* 背景色は後で変更 */
