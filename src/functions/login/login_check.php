@@ -17,6 +17,6 @@ if (!empty($result)) { //成功時
     exit;
 } else { //失敗時
     $err_log = 'メールアドレス、またはパスワードが違います';
-    $_SESSION['err'] = $err_log;
+    $_SESSION['err_login'] = $err_log;
     header('Location:' . './../view/login.view.php');
 }

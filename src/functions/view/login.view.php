@@ -14,8 +14,8 @@ require_once('./../common/meta.php');
                 <div>
                     <p class="red">
                         <?php
-                        if ($_SESSION['err']) {
-                            echo $_SESSION['err'];
+                        if ($_SESSION['err_login']) {
+                            echo $_SESSION['err_login'];
                         } ?>
                     </p>
                     <p id="err_email" class="red"></p>

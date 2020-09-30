@@ -101,7 +101,9 @@ require_once('./../common/meta.php');
         <!--login-form  -->
         <div class="center">
             <input type="submit" class="button" name="regist" value="登録">
-            <input type="button" name="back" class="button" value="戻る" 　onClick='history.back()'>
+            <a href="login.view.php">
+                <input type="button" class="button" value="戻る">
+            </a>
             </form>
         </div>
     </div>
