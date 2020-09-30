@@ -16,8 +16,8 @@ require_once('./../common/meta.php');
                     <div>
                         <label class="red">
                             <?php
-                            if ($_SESSION['err'][0]['err_name']) {
-                                echo $_SESSION['err'][0]['err_name'] . '<br>';
+                            if ($_SESSION['err']['err_name']) {
+                                echo $_SESSION['err']['err_name'] . '<br>';
                             } ?>
                         </label>
                         <input type="text" name="name" placeholder="ニックネーム"><br>
@@ -26,12 +26,12 @@ require_once('./../common/meta.php');
                     <div>
                         <label class="red">
                             <?php
-                            if ($_SESSION['err'][0]['empty_email']) {
-                                echo $_SESSION['err'][0]['empty_email'] . '<br>';
-                            } elseif ($_SESSION['err'][0]['preg_err_email']) {
-                                echo $_SESSION['err'][0]['preg_err_email'] . '<br>';
-                            } elseif ($_SESSION['err'][0]['isset_email']) {
-                                echo $_SESSION['err'][0]['isset_email'] . '<br>';
+                            if ($_SESSION['err']['empty_email']) {
+                                echo $_SESSION['err']['empty_email'] . '<br>';
+                            } elseif ($_SESSION['err']['preg_err_email']) {
+                                echo $_SESSION['err']['preg_err_email'] . '<br>';
+                            } elseif ($_SESSION['err']['isset_email']) {
+                                echo $_SESSION['err']['isset_email'] . '<br>';
                             }
                             ?>
                         </label>
@@ -40,10 +40,10 @@ require_once('./../common/meta.php');
                     <div>
                         <label class="red">
                             <?php
-                            if ($_SESSION['err'][0]['empty_email']) {
-                                echo $_SESSION['err'][0]['empty_email'] . '<br>';
-                            } elseif ($_SESSION['err'][0]['again_email']) {
-                                echo $_SESSION['err'][0]['again_email'] . '<br>';
+                            if ($_SESSION['err']['empty_email']) {
+                                echo $_SESSION['err']['empty_email'] . '<br>';
+                            } elseif ($_SESSION['err']['again_email']) {
+                                echo $_SESSION['err']['again_email'] . '<br>';
                             }
                             ?>
                             <input type="email" name="email_again" placeholder="メールアドレスの再入力"><br>
@@ -52,8 +52,8 @@ require_once('./../common/meta.php');
                     <div>
                         <label class="red">
                             <?php
-                            if ($_SESSION['err'][0]['empty_password']) {
-                                echo $_SESSION['err'][0]['empty_password'] . '<br>';
+                            if ($_SESSION['err']['empty_password']) {
+                                echo $_SESSION['err']['empty_password'] . '<br>';
                             }
                             // elseif ($_SESSION['err'][0]['preg_err_password']) {
                             //     echo $_SESSION['err'][0]['preg_err_password'] . '<br>';
@@ -65,10 +65,10 @@ require_once('./../common/meta.php');
                     <div>
                         <label class="red">
                             <?php
-                            if ($_SESSION['err'][0]['empty_password']) {
-                                echo $_SESSION['err'][0]['empty_password'] . '<br>';
-                            } elseif ($_SESSION['err'][0]['password_again']) {
-                                echo $_SESSION['err'][0]['password_again'] . '<br>';
+                            if ($_SESSION['err']['empty_password']) {
+                                echo $_SESSION['err']['empty_password'] . '<br>';
+                            } elseif ($_SESSION['err']['password_again']) {
+                                echo $_SESSION['err']['password_again'] . '<br>';
                             }
                             ?>
                         </label>
@@ -77,8 +77,8 @@ require_once('./../common/meta.php');
                     <div>
                         <label class="red" name='question'>
                             <?php
-                            if ($_SESSION['err'][0]['err_question']) {
-                                echo $_SESSION['err'][0]['err_question'] . '<br>';
+                            if ($_SESSION['err']['err_question']) {
+                                echo $_SESSION['err']['err_question'] . '<br>';
                             } ?>
                         </label>
                         <select name="question_id">
@@ -89,8 +89,8 @@ require_once('./../common/meta.php');
                     <div>
                         <label class="red">
                             <?php
-                            if ($_SESSION['err'][0]['err_answer']) {
-                                echo $_SESSION['err'][0]['err_answer'] . '<br>';
+                            if ($_SESSION['err']['err_answer']) {
+                                echo $_SESSION['err']['err_answer'] . '<br>';
                             } ?>
                         </label>
                         <input type="text" name="answer" placeholder="秘密の質問の答え"><br>
