@@ -20,8 +20,8 @@ class Account
             ':pass' => "{$data['password']}"
         ];
         $result = $this->pdo->insert($table, $column, $value, $pre_value);
-        $member_id = $this->get_member_id($data['email']); //valueが違うので明日はこの部分の手直し
-        $this->answer_regist($data, $member_id); //秘密の質問登録
+        $member_id = $this->get_member_id($data['email']); //
+        $this->answer_regist($data, $member_id[0]['member_id']); //秘密の質問登録
         return;
     }
 
@@ -29,10 +29,10 @@ class Account
     {
         $table = ' Member ';
         $column = ' member_id ';
-        $value = [':email' => "{$email}"];
+        $value = [':email' => $email];
         $option = ' where email=:email';
         $result = $this->pdo->select($table, $column, $value, $option);
-        return $result['member_id'];
+        return $result;
     }
 
     private function pass_hash($data)
