@@ -88,9 +88,12 @@ require_once('./../task/show_category.php');
                     <div class="edit-form task-form">
                         <p class="red">
                             <?php
-                            if ($_SESSION['add_category']) {
+                            if ($_SESSION['add_category']) {//追加に成功した場合
                                 echo $_SESSION['add_category'];
-                            } ?>
+                            } elseif ($_SESSION['err_category']) {//空白の場合
+                                echo $_SESSION['err_category'];
+                            }
+                             ?>
                         </p>
                         <input type="text" name="c_name" placeholder="カテゴリーの追加">
                         <input type="submit" name="add_category" value="追加">
