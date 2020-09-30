@@ -47,14 +47,17 @@ require_once('./../task/show_category.php');
                         </select>
                     </div>
                     <div>
-                        <label>カテゴリー</label>
-                        <select name="category_id">
-                            <?php
-                            for ($i = 1; $i < count($category_list); $i++) {
-                            ?>
-                                <option value="<?php echo $category_list[$i]['category_id'] ?>"><?php echo $category_list[$i]['c_name']; ?></option>
-                            <?php } ?>
-                        </select>
+                        <span>カテゴリー:</span>
+                        <br>
+                        <?php
+                        for ($i = 1; $i < count($category_list); $i++) {
+                        ?>
+                            <input type="checkbox" id="<?php echo $category_list[$i]['category_id'] ?>" name="category_id" value="<?php echo $category_list[$i]['category_id'] ?>">
+                            <label for="<?php echo $category_list[$i]['category_id'] ?>">
+                                <?php echo $category_list[$i]['c_name']; ?>
+                            </label>
+                            <br>
+                        <?php } ?>
                     </div>
                     <div>
                         <span>メモ</span>
