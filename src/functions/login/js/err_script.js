@@ -5,7 +5,7 @@ function err_login(email = '', password = '') {
     const correct_pass = /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{4,10}$/i;
 
     if (email === '') { //空白チェック
-        event.preventDefault();
+        e.preventDefault();
         document.getElementById('err_email').textContent = 'メールアドレスが空白です'
     }
     // 以下のコメントアウトは新規登録が実装完了次第
@@ -15,7 +15,7 @@ function err_login(email = '', password = '') {
     // }
 
     if (password === '') { //空白チェック
-        event.preventDefault();
+        e.preventDefault();
         document.getElementById('err_password').textContent = 'パスワードが空白です'
     }
     // 以下のコメントアウトは新規登録が実装完了次第
