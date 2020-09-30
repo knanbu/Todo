@@ -16,6 +16,7 @@ if ($_POST['add_category']) { //カテゴリーの追加が行われたとき
     unset($data['add_category']);
     $task->addCategory($data, $member_id); //カテゴリーの追加
     $_SESSION['add_category'] = '新しいカテゴリーが追加されました';
+    header('Location:' . './../view/add_task.view.php');
 }
 if ($data['add']) {//タスクが追加されたとき
     unset($data['add']);
