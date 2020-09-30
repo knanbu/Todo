@@ -50,7 +50,7 @@ require_once('./../task/show_category.php');
                         <span>カテゴリー:</span>
                         <br>
                         <?php
-                        for ($i = 1; $i < count($category_list); $i++) {
+                        for ($i = 1; $i <= count($category_list); $i++) {
                         ?>
                             <input type="checkbox" id="<?php echo $category_list[$i]['category_id'] ?>" name="category_id[]" value="<?php echo $category_list[$i]['category_id'] ?>">
                             <label for="<?php echo $category_list[$i]['category_id'] ?>">
