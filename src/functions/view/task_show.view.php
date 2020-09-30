@@ -39,7 +39,7 @@ require('./../task/task_show.php');
                 </div><!-- category-item-->
             </div>
             <div class="center ">
-                <p><a href="">アカウント設定</a></p>
+                <p><a href="acc_setting.view.php">アカウント設定</a></p>
             </div>
             <div class="center">
                 <p><a href="">ログアウト</a></p>

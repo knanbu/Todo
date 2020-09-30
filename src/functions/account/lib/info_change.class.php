@@ -31,7 +31,20 @@ class Info_change
             ':member_id' => (int)$member_id
         ];
         $option = ' where member_id=:member_id ';
-        $result = $this->pdo->update($table, $column, $value, $pre_value, $option);
+        $this->pdo->update($table, $column, $value, $pre_value, $option);
+        return;
+    }
+    public function change_name($name,$member_id)
+    {
+        $table = ' Member ';
+        $column = ['member_name=:name'];
+        $value = ' ';
+        $pre_value = [
+            ':name' => $name,
+            ':member_id' => (int)$member_id
+        ];
+        $option = ' where member_id=:member_id ';
+        $this->pdo->update($table, $column, $value, $pre_value, $option);
         return;
     }
 }

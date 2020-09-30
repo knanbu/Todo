@@ -3,7 +3,8 @@ require('./../lib/session.php');
 $session = new Session();
 $title = 'タスク一覧';
 require_once('./../common/meta.php');
-require('./../task/task_show.php');
+require_once('./../account/acc_info.php');
+
 ?>
 <html>
 
@@ -46,23 +47,15 @@ require('./../task/task_show.php');
         </div>
 
         <!-- タスク一覧画面 -->
-        <div class="task-show">
-            <h2>アカウント設定</h2>
-            <ul>
-                <a href="change_name.view.php">
-                    <li>名前変更</li>
-                </a>
-                <a href="">
-                    <li>メールアドレス変更</li>
-                </a>
-                <a href="">
-                    <li>パスワード変更</>
-                </a>
-                <a href="">
-                    <li>退会</li>
-                </a>
-            </ul>
-        </div> <!-- task-show -->
+        <div class="change-box">
+            <h2>名前の変更</h2>
+            <p>現在の名前：<?php echo $now_name[0]['member_name'] ?></p>
+
+            <form action="./../account/change_info.php" method="post">
+                <input type="text" name="new_name" value="<?php echo $now_name[0]['member_name']; ?>">
+                <input type="submit" name="change_name" value="変更">
+            </form>
+        </div> <!-- change-box -->
     </div><!-- task-box -->
     <?php require_once('./../common/footer.php'); ?>
 </body>
