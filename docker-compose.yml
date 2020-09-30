@@ -31,6 +31,7 @@ services:
       # MySQLの設定ファイル
       - ./mysql/mysql_conf:/etc/mysql/conf.d
       - ./mysql/db:/var/lib/mysql
+      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
     networks:
       - todo
 

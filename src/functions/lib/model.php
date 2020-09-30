@@ -13,7 +13,7 @@ class Database
     public function connectDB() //DB接続
     {
         try {
-            $dbh = new PDO("mysql:host=todo-mysql;dbname=todo_db", "root", "root");
+            $dbh = new PDO("mysql:host=todo-mysql;dbname=todo_db", "user1", "pass");
             $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             print($e->getMessage());
