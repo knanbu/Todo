@@ -10,11 +10,12 @@ $task = new Task($pdo);
 $err = new TaskError();
 
 $data = $_POST;
+$member_id=(int)$_SESSION['member_id'];
 unset($data['add']);
 $err_data = $err->err_check($data); //エラーチェック
 if (empty($err_data)) { //エラーなしの場合
     unset($_SESSION['errtask']);//エラー削除
-    $task->edit_task($data); //タスクの編集
+    $task->edit_task($member_id,$data); //タスクの編集
     header('Location:' . './../view/task_show.view.php');
 } else { //エラーありの場合
     $_SESSION['err_task'] = $err_data;

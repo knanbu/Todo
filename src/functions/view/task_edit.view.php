@@ -15,6 +15,7 @@ require_once('./../task/show_cate_task.php');
             <h2>タスク編集</h2>
             <p><span class="red">*</span> 必須項目</p>
             <form action="./../task/task_edit.php" method="post">
+            <input type="hidden" name="task_id" value="<?php echo $task_id;?>">
                 <div class="grid-form task-form">
                     <div>
                         <p class="red">
