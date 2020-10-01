@@ -3,7 +3,7 @@ require('./../lib/session.php');
 $ses = new Session();
 $title = 'タスクの登録';
 require_once('./../common/meta.php');
-require_once('./../task/show_category.php');
+require_once('./../task/show_cate_task.php');
 
 ?>
 <html>
@@ -50,7 +50,7 @@ require_once('./../task/show_category.php');
                         <span>カテゴリー:</span>
                         <br>
                         <?php
-                        for ($i = 1; $i <= count($category_list); $i++) {
+                        for ($i = 0; $i < count($category_list); $i++) {
                         ?>
                             <input type="checkbox" id="<?php echo $category_list[$i]['category_id'] ?>" name="category_id[]" value="<?php echo $category_list[$i]['category_id'] ?>">
                             <label for="<?php echo $category_list[$i]['category_id'] ?>">

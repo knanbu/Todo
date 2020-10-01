@@ -1,35 +1,21 @@
 <?php
 require('./../lib/session.php');
-$session = new Session();
-$title = 'タスク編集';
+$ses = new Session();
+$title = 'タスクの編集';
 require_once('./../common/meta.php');
-require('./../task/task_show.php');
+require_once('./../task/show_cate_task.php');
 
 ?>
 <html>
 
 <body>
     <?php require_once('./../common/header.php'); ?>
-    <h2>タスクの編集</h2>
-    <div class="edit-box">
-        <!-- 古いタスク -->
-        <div class="old-task">
-            <ul>
-                <li>タスク名：<?php echo $task_info[0]['task_name']; ?></li>
-                <li>優先度：<?php echo $task_info[0]['priority']; ?></li>
-                <li>カテゴリー名<?php echo $category_name[0]['c_name']; ?></li>
-                <li>メモ：<?php echo $task_info[0]['comment']; ?></li>
-                <li>開始時期：<?php echo $task_info[0]['start_date']; ?></li>
-                <li>終了時期：<?php echo $task_info[0]['limit_date']; ?></li>
-            </ul>
-        </div>
-        <!--<old-task> -->
-        <!-- 新しいタスク -->
-        <form action="./../task/task_edit.php" method="post">
-            <input type="hidden" name="task_id" value="<?php echo $_GET['task_id'] ?>">
-            <div class="new-task">
-                <p><span class="red">*</span> 必須項目</p>
-                <div class=" edit-form task-form">
+    <div class="add-box">
+        <div class="add-task-box">
+            <h2>タスク編集</h2>
+            <p><span class="red">*</span> 必須項目</p>
+            <form action="./../task/task_edit.php" method="post">
+                <div class="grid-form task-form">
                     <div>
                         <p class="red">
                             <?php
@@ -38,7 +24,8 @@ require('./../task/task_show.php');
                             } ?>
                         </p>
                         <span class="red">*</span>
-                        <input type="text" name="task_name" placeholder="タスク名"><br>
+                        <label>タスク名</label>
+                        <input type="text" name="task_name" value="<?php echo $task_info[0]['task_name']; ?>"><br>
                     </div>
                     <div>
                         <p class="red">
@@ -50,54 +37,46 @@ require('./../task/task_show.php');
                         <span class="red">*</span>
                         <label>優先順位</label>
                         <select name="priority">
-                            <option value="">未選択</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </div>
-                    <div>
-                        <p class="red">
-                            <?php
-                            if ($_SESSION['err_task']) {
-                                echo $_SESSION['err_task']['err_category'];
-                            } ?>
-                        </p>
-                        <span class="red">*</span>
-                        <label>カテゴリー</label>
-                        <select name="category_id">
-                            <option value="">未選択</option>
-                            <?php
-                            for ($i = 0; $i < count($category_list); $i++) {
-                            ?>
-                                <option value="<?php echo $category_list[$i]['category_id'] ?>"><?php echo $category_list[$i]['c_name']; ?></option>
+                            <?php foreach ($priority as  $value) { ?>
+                                <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
                             <?php } ?>
                         </select>
                     </div>
                     <div>
+                        <span>カテゴリー:</span>
+                        <br>
+                        <?foreach ($category_list as $key => $value) {?>
+                            <input type="checkbox" id="<?php echo  $value['category_id']; ?>" name="category_id[]" value="<?php echo $value['category_id']; ?>" <?php if (in_array($value['category_id'],$category_id,true)) {
+                                echo 'checked';
+                            }?>>
+                            <label for="<?php echo $value['category_id'];?>">
+                                <?php echo $value['c_name']; ?>
+                            </label>
+                            <br>
+                        <?php } ?>
+                    </div>
+                    <div>
                         <span>メモ</span>
-                        <input type="text" name="comment"><br>
+                        <input type="text" name="comment" value="<?php echo $task_info[0]['comment']; ?>"><br>
                     </div>
                     <div>
                         <label>開始
-                            <input type="date" name="start_date" value='null' placeholder="始める日"><br>
+                            <input type="date" name="start_date" value='<?php echo $task_info[0]['start_date']; ?>' placeholder="始める日"><br>
                         </label>
                     </div>
                     <div>
                         <label>終了
-                            <input type="date" name="limit_date" value='null' placeholder="終わる日"><br>
+                            <input type="date" name="limit_date" value='<?php echo $task_info[0]['limit_date']; ?>' placeholder="終わる日"><br>
                         </label>
                     </div>
                 </div>
-                <!--<task-form> -->
                 <div class="center">
-                    <input type="submit" class="button" name="add" value="登録">
+                    <input type="submit" class="button" name="add" value="更新">
                 </div>
-        </form>
-    </div><!-- new-task -->
-    </div><!-- edit-box -->
+            </form>
+        </div>
+    </div>
+    <!--  -->
     <?php require_once('./../common/footer.php'); ?>
 </body>
 

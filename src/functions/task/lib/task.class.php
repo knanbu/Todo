@@ -32,17 +32,29 @@ class Task
         return $result;
     }
 
-    public function getTask($task_id) //タスクの取得
+    public function getTask($task_id) //タスクの詳細取得
     {
         $table = ' Task ';
         $column = ' * ';
         $value = [
-            ':task_id' => $task_id,
+            ':task_id' => $task_id
         ];
         $option = ' where task_id=:task_id ';
         $result = $this->pdo->select($table, $column, $value, $option);
         return $result;
     }
+    public function getTaskCategory($task_id)//登録されたいるタスクに対するタスク情報とカテゴリー名を取得
+    {
+        $table = ' TCList as tc join Task as t on tc.task_id=t.task_id join Category as c on tc.category_id=c.category_id ';
+        $column = ' tc.task_id,tc.category_id, t.task_name,t.priority,t.start_date,t.limit_date,t.comment,c.c_name  ';
+        $value = [
+            ':task_id' => $task_id
+        ];
+        $option = ' where tc.task_id=:task_id ';
+        $result = $this->pdo->select($table, $column, $value, $option);
+        return $result;
+    }
+
     public function getCategoryName($category_id) //カテゴリーの名前の取得
     {
         $table = ' Category ';
