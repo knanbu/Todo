@@ -8,7 +8,6 @@ $task = new Task($pdo);
 
 $member_id = $_SESSION['member_id']; //会員情報
 $category_list = $task->getCategoryList($member_id); //カテゴリーの表示
-$unset_c_id='';//表示しないカテゴリーid
 
 foreach ($category_list as $key=> $value) {
     if ($value['c_name']==='すべて') {//カテゴリーのすべての項目はデフォルト値であるから抜く
@@ -18,10 +17,9 @@ foreach ($category_list as $key=> $value) {
 }
 
 if ($_GET['task_id']) { //タスクの詳細
-
-    $category_id=[];
     $task_id = $_GET['task_id'];
     $task_info = $task->getTaskCategory($task_id);//登録されたいるタスクに対するタスク情報とカテゴリー名を取得
+    $category_id=[];//登録されているタスクに紐づいているカテゴリーID
     for ($h=0; $h <count($task_info) ; $h++) { 
         $category_id[]=$task_info[$h]['category_id'];
     }
@@ -37,6 +35,3 @@ if ($_GET['task_id']) { //タスクの詳細
     }
 }
 
-
-// var_dump($task_info);
-// var_dump($category_list);
