@@ -42,7 +42,7 @@ require('./../task/task_show.php');
                 <p><a href="acc_setting.view.php">アカウント設定</a></p>
             </div>
             <div class="center">
-                <p><a href="">ログアウト</a></p>
+                <p><a href="logout.view.php">ログアウト</a></p>
             </div>
         </div>
 
