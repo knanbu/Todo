@@ -75,6 +75,30 @@ require_once('./../task/show_cate_task.php');
                 </div>
             </form>
         </div>
+                <!--カテゴリー追加-->
+        <div class="edit-box">
+            <form action="./../task/add_category.php" method="post">
+                <div class="new-task">
+                    <h2>カテゴリーの追加</h2>
+                    <div class="edit-form task-form">
+                        <input type="hidden" name="task_id" value="<?php echo $task_id?>">
+                        <p class="red">
+                            <?php
+                            if ($_SESSION['add_category']) { //追加に成功した場合
+                                echo $_SESSION['add_category'];
+                            } elseif ($_SESSION['err_category']) { //空白の場合
+                                echo $_SESSION['err_category'];
+                            }
+                            ?>
+                        </p>
+                        <input type="text" name="c_name" placeholder="カテゴリーの追加">
+                        <input type="submit" name="add_category_edit" value="追加">
+                    </div>
+                </div>
+            </form>
+            <!-- edit-box -->
+        </div>
+
     </div>
     <!--  -->
     <?php require_once('./../common/footer.php'); ?>
