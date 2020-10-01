@@ -56,6 +56,12 @@ require('./../task/task_show.php');
             <form action="./../task/delete_task.php" method="post">
                 <div class="delete-button">
                     <input type="submit" name="delete" value="削除">
+                    <span class="red">
+                    <?php
+                     if ($_SESSION['err_delete']) {
+                        echo $_SESSION['err_delete'];
+                    }?>
+                    </span>
                 </div>
                 <ul>
                     <?php
