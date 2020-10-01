@@ -10,7 +10,6 @@ class TaskError
     {
         $this->check_task_name($data);
         $this->check_priority($data);
-        $this->check_category($data);
         return $this->err_array;
     }
 
@@ -25,13 +24,6 @@ class TaskError
     {
         if (empty($data['priority'])) { //空白チェック
             $this->err_array['err_priority'] = '優先順位が未選択です';
-            return;
-        }
-    }
-    private function check_category($data)
-    {
-        if (empty($data['category_id'])) { //空白チェック
-            $this->err_array['err_category'] = 'カテゴリーが未選択です';
             return;
         }
     }

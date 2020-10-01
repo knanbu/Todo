@@ -20,7 +20,7 @@ class Task
         $result = $this->pdo->select($table, $column, $value, $option);
         return $result;
     }
-    public function getCategoryList($member_id)//カテゴリーを取得
+    public function getCategoryList($member_id) //カテゴリーを取得
     {
         $table = ' Category ';
         $column = ' category_id,c_name ';
@@ -32,7 +32,7 @@ class Task
         return $result;
     }
 
-    public function getTask($task_id)//タスクの取得
+    public function getTask($task_id) //タスクの取得
     {
         $table = ' Task ';
         $column = ' * ';
@@ -43,7 +43,7 @@ class Task
         $result = $this->pdo->select($table, $column, $value, $option);
         return $result;
     }
-    public function getCategoryName($category_id)//カテゴリーの名前の取得
+    public function getCategoryName($category_id) //カテゴリーの名前の取得
     {
         $table = ' Category ';
         $column = ' c_name ';
@@ -55,7 +55,7 @@ class Task
         return $result;
     }
 
-    public function addCategory($c_name, $member_id)//カテゴリの追加
+    public function addCategory($c_name, $member_id) //カテゴリの追加
     {
         $table = ' Category ';
         $column = ' c_name,member_id ';
@@ -83,12 +83,12 @@ class Task
             ':comment' => $data['comment']
         ];
         $this->pdo->insert($table, $column, $value, $pre_value);
-        $task_id=$this->get_task_id($member_id);//会員のタスクIDの中で一番最新のものを取得
-        $this->addTC_table($member_id,$task_id[0]["max(task_id)"],$data);//タスクとカテゴリーの中間テーブルへの追加
+        $task_id = $this->get_task_id($member_id); //会員のタスクIDの中で一番最新のものを取得
+        $this->addTC_table($member_id, $task_id[0]["max(task_id)"], $data); //タスクとカテゴリーの中間テーブルへの追加
         return;
     }
 
-    private function get_task_id($member_id)//会員のタスクIDの中で一番最新のものを取得
+    private function get_task_id($member_id) //会員のタスクIDの中で一番最新のものを取得
     {
         $table = ' Task ';
         $column = ' max(task_id) ';
@@ -100,32 +100,34 @@ class Task
         return $result;
     }
 
-    private function addTC_table($member_id,$task_id,$data)//タスクとカテゴリーの中間テーブルへの追加
+    private function addTC_table($member_id, $task_id, $data) //タスクとカテゴリーの中間テーブルへの追加
     {
-        $this->addTC_table_default($task_id,$member_id);
-        foreach ($data['category_id'] as  $category_id) {
-            $table = ' TCList ';
-            $column = '  task_id,category_id ';
-            $value = ' :task_id,:category_id ';
-            $pre_value = [
-                ':task_id' => $task_id,
-                ':category_id' => (int)$category_id
-            ];
-            $this->pdo->insert($table, $column, $value, $pre_value);
+        $this->addTC_table_default($task_id, $member_id);
+        if (!empty($data['category_id'])) {
+            foreach ($data['category_id'] as  $category_id) {
+                $table = ' TCList ';
+                $column = '  task_id,category_id ';
+                $value = ' :task_id,:category_id ';
+                $pre_value = [
+                    ':task_id' => $task_id,
+                    ':category_id' => (int)$category_id
+                ];
+                $this->pdo->insert($table, $column, $value, $pre_value);
+            }
         }
         return;
     }
 
-    private function addTC_table_default($task_id,$member_id)//
+    private function addTC_table_default($task_id, $member_id) //
     {
-        $category_list=$this->getCategoryList($member_id);
+        $category_list = $this->getCategoryList($member_id);
         $index = '';
         foreach ($category_list as $key => $value) {
             if ($value['c_name'] === 'すべて') { //カテゴリーのすべての項目はデフォルト値を探す
                 $index = $key;
             }
         }
-        $category_id=$category_list[$index]['category_id'];//カテゴリーの「すべて」
+        $category_id = $category_list[$index]['category_id']; //カテゴリーの「すべて」
         $table = ' TCList ';
         $column = '  task_id,category_id ';
         $value = ' :task_id,:category_id ';
@@ -171,7 +173,7 @@ class Task
         $this->pdo->update($table, $column, $value, $pre_value, $option);
         return;
     }
-    private function editTC_table($task_id,$data)//タスクとカテゴリーの中間テーブルへの追加
+    private function editTC_table($task_id, $data) //タスクとカテゴリーの中間テーブルへの追加
     {
         $table = ' TCList ';
         $column = '  task_id,category_id ';
@@ -183,7 +185,7 @@ class Task
         $this->pdo->insert($table, $column, $value, $pre_value);
         return;
     }
-    public function edit_category($data)//カテゴリーの編集
+    public function edit_category($data) //カテゴリーの編集
     {
         $table = ' Category ';
         $column = ['c_name=:c_name'];
@@ -197,7 +199,7 @@ class Task
         return;
     }
 
-    public function delete_category()//カテゴリーの削除
+    public function delete_category() //カテゴリーの削除
     {
         # code...
     }
