@@ -78,7 +78,7 @@ require_once('./../task/show_cate_task.php');
         </div>
                 <!--カテゴリー追加-->
         <div class="edit-box">
-            <form action="./../task/add_category.php" method="post">
+            <form action="./../task/add_edit_category.php" method="post">
                 <div class="new-task">
                     <h2>カテゴリーの追加</h2>
                     <div class="edit-form task-form">

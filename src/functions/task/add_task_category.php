@@ -23,17 +23,3 @@ if (!empty($data['add_category']) && !empty($data['c_name'])) { //カテゴリ�
     $_SESSION['err_category'] = '空白です';
     header('Location:' . './../view/add_task.view.php');
 }
-
-
-//編集画面
-if (!empty($data['add_category_edit']) && !empty($data['c_name'])) { //カテゴリーの追加が行われたとき
-    unset($data['add_category_edit']);//不必要なもの削除
-    unset($_SESSION['err_category']);//不必要なもの削除
-    $task->addCategory($data['c_name'], $member_id); //カテゴリーの追加
-    $_SESSION['add_category'] = '新しいカテゴリーが追加されました';
-    header('Location:' . "./../view/task_edit.view.php?task_id={$data['task_id']}");
-}else { //エラーの場合
-    unset($_SESSION['add_category']);
-    $_SESSION['err_category'] = '空白です';
-    header('Location:' . "./../view/task_edit.view.php?task_id={$data['task_id']}");
-}

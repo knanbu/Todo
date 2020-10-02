@@ -28,7 +28,7 @@ class Account
     private function defaultCategoryInsert($member_id) //各アカウントごとのデフォルトのカテゴリー追加
     {
         $table = ' Category ';
-        $column = 'member_id,c_name ';
+        $column = ' member_id,c_name ';
         $value = ' :member_id , :c_name ';
         $pre_value = [
             ':member_id' => $member_id,
