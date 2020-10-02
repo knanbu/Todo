@@ -18,10 +18,8 @@ class  Login
         ];
         $option = ' where email=:email '; 
         $result = $this->pdo->select($table, $column, $value, $option);
-
-        if (password_verify($data['password'], $result['password'])) { //ハッシュ化されたDB上でのパスワードを解読
+        if (password_verify($data['password'], $result[0]['pass'])) { //ハッシュ化されたDB上でのパスワードを解読
             return $result;
         }
-        return $result;
     }
 }
