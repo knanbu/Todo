@@ -69,6 +69,12 @@ require_once('./../task/show_cate_task.php');
                         </label>
                     </div>
                     <div>
+                        <p class="red">
+                            <?php
+                            if ($_SESSION['err_task']) {
+                                echo $_SESSION['err_task']['err_date'];
+                            } ?>
+                        </p>
                         <label>終了
                             <input type="date" name="limit_date" value='null' placeholder="終わる日"><br>
                         </label>

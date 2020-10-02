@@ -11,8 +11,6 @@ $err = new TaskError();
 
 $member_id = $_SESSION['member_id']; //会員情報
 $data = $_POST;
-
-
 if ($data['add']) {//タスクが追加されたとき
     unset($data['add']);
     $errArray = $err->err_check($data);
