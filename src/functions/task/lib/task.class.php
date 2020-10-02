@@ -9,7 +9,7 @@ class Task
         $this->pdo = $db; //データベース接続
     }
 
-    public function getTaskList($member_id) //各アカウントのタスクを取得
+    public function getTaskList($member_id) //各アカウントのすべてのタスクを取得
     {
         $table = ' Task ';
         $column = ' * ';
@@ -17,6 +17,18 @@ class Task
             ':member_id' => $member_id,
         ];
         $option = ' where member_id=:member_id ';
+        $result = $this->pdo->select($table, $column, $value, $option);
+        return $result;
+    }
+    public function getCategoryTaskList($member_id, $category_id) //カテゴリー別のタスク取得
+    {
+        $table = ' TCList as tc join Task as t on tc.task_id=t.task_id join Category as c on tc.category_id=c.category_id ';
+        $column = ' tc.task_id,tc.category_id,t.member_id, t.task_name,t.priority,t.start_date,t.limit_date,t.comment,c.c_name  ';
+        $value = [
+            ':member_id' => $member_id,
+            ':category_id' => $category_id
+        ];
+        $option = ' where t.member_id=:member_id and tc.category_id=:category_id ';
         $result = $this->pdo->select($table, $column, $value, $option);
         return $result;
     }
@@ -43,7 +55,7 @@ class Task
         $result = $this->pdo->select($table, $column, $value, $option);
         return $result;
     }
-    public function getTaskCategory($task_id)//登録されたいるタスクに対するタスク情報とカテゴリー名を取得
+    public function getTaskCategory($task_id) //登録されたいるタスクに対するタスク情報とカテゴリー名を取得
     {
         $table = ' TCList as tc join Task as t on tc.task_id=t.task_id join Category as c on tc.category_id=c.category_id ';
         $column = ' tc.task_id,tc.category_id, t.task_name,t.priority,t.start_date,t.limit_date,t.comment,c.c_name  ';
@@ -155,7 +167,7 @@ class Task
         $table = ' Task ';
         $column = ' ';
         $pre_value = [];
-        if (is_array($task_id)) {//要素が複数あった場合
+        if (is_array($task_id)) { //要素が複数あった場合
             foreach ($task_id as $key => $value) {
                 $pre_value[":task_id{$key}"] = $value;
                 if ($key !== count($task_id) - 1) {
@@ -164,13 +176,13 @@ class Task
                     $column .= " task_id=:task_id{$key} ";
                 }
             }
-        }else{//要素が一つしか無かった場合
-            $column=' task_id=:task_id ';
-            $pre_value=[':task_id'=>$task_id];
+        } else { //要素が一つしか無かった場合
+            $column = ' task_id=:task_id ';
+            $pre_value = [':task_id' => $task_id];
         }
 
         $this->pdo->delete($table, $column, $pre_value);
-        $this->deleteTC_task($task_id);//中間テーブルのタスクも削除
+        $this->deleteTC_task($task_id); //中間テーブルのタスクも削除
         return;
     }
     private function deleteTC_task($task_id)
@@ -178,7 +190,7 @@ class Task
         $table = ' TCList ';
         $column = ' ';
         $pre_value = [];
-        if (is_array($task_id)) {//要素が複数あった場合
+        if (is_array($task_id)) { //要素が複数あった場合
             foreach ($task_id as $key => $value) {
                 $pre_value[":task_id{$key}"] = $value;
                 if ($key !== count($task_id) - 1) {
@@ -187,22 +199,22 @@ class Task
                     $column .= " task_id=:task_id{$key} ";
                 }
             }
-        } else {//要素が一つしか無かった場合
+        } else { //要素が一つしか無かった場合
             $column = ' task_id=:task_id ';
             $pre_value = [':task_id' => $task_id];
         }
         $this->pdo->delete($table, $column, $pre_value);
         return;
     }
-    public function edit_task($member_id,$data) //タスクの編集
+    public function edit_task($member_id, $data) //タスクの編集
     {
         $this->check_space($data);
-        $this->delete_task($data['task_id']);//タスクの削除
+        $this->delete_task($data['task_id']); //タスクの削除
         $table = ' Task ';
-        $column =' task_name,member_id, priority, comment, start_date, limit_date ';
+        $column = ' task_name,member_id, priority, comment, start_date, limit_date ';
         $value = ' :task_name,:member_id,:priority,:comment,:start_date,:limit_date ';
         $pre_value = [
-            ":member_id"=>$member_id,
+            ":member_id" => $member_id,
             ":task_name" => $data['task_name'],
             ":priority" => (int)$data['priority'],
             ":comment" => $data['comment'],
@@ -211,20 +223,20 @@ class Task
         ];
         $this->pdo->insert($table, $column, $value, $pre_value);
         $task_id = $this->get_task_id($member_id); //会員のタスクIDの中で一番最新のものを取得
-        $this->editTC_table((int)$task_id[0]["max(task_id)"],$data['category_id'],$member_id);
+        $this->editTC_table((int)$task_id[0]["max(task_id)"], $data['category_id'], $member_id);
         return;
     }
-    private function editTC_table($task_id, $category_id,$member_id) //タスクとカテゴリーの中間テーブルへの追加
+    private function editTC_table($task_id, $category_id, $member_id) //タスクとカテゴリーの中間テーブルへの追加
     {
-        $this->addTC_table_default($task_id,$member_id);//デフォルトで「すべて」のカテゴリーを紐づけ
-        if (!empty($category_id)) {//カテゴリーが選択されている場合
+        $this->addTC_table_default($task_id, $member_id); //デフォルトで「すべて」のカテゴリーを紐づけ
+        if (!empty($category_id)) { //カテゴリーが選択されている場合
             foreach ($category_id as  $id) {
                 $table = ' TCList ';
                 $column = ' task_id,category_id ';
                 $value = ' :task_id,:category_id ';
                 $pre_value = [
                     ':task_id' => $task_id,
-                    ':category_id' =>$id
+                    ':category_id' => $id
                 ];
                 $this->pdo->insert($table, $column, $value, $pre_value);
             }

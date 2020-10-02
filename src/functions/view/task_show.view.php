@@ -24,7 +24,9 @@ require('./../task/task_show.php');
                     for ($i = 0; $i <= count($category_list) - 1; $i++) {
                     ?>
                         <div class="category-item-detail">
-                            <button><?php echo $category_list[$i]['c_name']; ?></button>
+                            <a href="task_show.view.php?category_id=<?php echo $category_list[$i]['category_id']; ?>">
+                                <?php echo $category_list[$i]['c_name']; ?>
+                            </a>
 
                             <a href="edit_category.view.php?category_id=<?php echo $category_list[$i]['category_id'] ?>">
                                 <button class="three-point">&#8942; &nbsp 削除</button>

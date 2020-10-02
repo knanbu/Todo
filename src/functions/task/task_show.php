@@ -8,8 +8,9 @@ $task = new Task($pdo);
 $account=new Account($pdo);
 
 $member_id = $_SESSION['member_id']; //アカウント情報
-$task_list = $task->getTaskList($member_id); //各アカウントのタスク取得
 $category_list = $task->getCategoryList($member_id); //各アカウントのカテゴリー覧取得
+
+$task_list = $task->getTaskList($member_id); //各アカウントのタスク取得
 $member_name=$account->show_name($member_id);
 
 if ($_GET['task_id']) { //タスクの詳細
@@ -18,7 +19,8 @@ if ($_GET['task_id']) { //タスクの詳細
     $category_name = $task->getCategoryName($task_info[0]['category_id']);
 }
 
-if ($_GET['category_id']) { //カテゴリーの編集
+if ($_GET['category_id']) { //サイドバーのカテゴリーが押された場合
     $category_id = $_GET['category_id'];
-    $category_name = $task->getCategoryName($category_id);
+    $category_name = $task->getCategoryName($category_id);//カテゴリーの編集
+    $task_list=$task->getCategoryTaskList($member_id,$category_id);//カテゴリー別のタスク取得
 }
