@@ -24,16 +24,24 @@ require('./../task/task_show.php');
                     for ($i = 0; $i <= count($category_list) - 1; $i++) {
                     ?>
                         <div class="category-item-detail">
-                            <a href="task_show.view.php?category_id=<?php echo $category_list[$i]['category_id']; ?>">
-                                <?php echo $category_list[$i]['c_name']; ?>
-                            </a>
-
-                            <a href="../task/delete_category.php?category_id=<?php echo $category_list[$i]['category_id'] ?>">
-                                <button class="three-point">&#8942; &nbsp 削除</button>
-                            </a>
-                            <a href="edit_category.view.php?category_id=<?php echo $category_list[$i]['category_id'] ?>">
-                                <button class="three-point">編集</button>
-                            </a>
+                            <?php
+                            if ($category_list[$i]['c_name'] === 'すべて') {//「すべて」だけ削除と編集は無し
+                            ?>
+                                <a href="task_show.view.php?category_id=<?php echo $category_list[$i]['category_id']; ?>">
+                                    <?php echo $category_list[$i]['c_name']; ?>
+                                </a>
+                                <?php }else{ ?>
+                                    
+                                <a href="task_show.view.php?category_id=<?php echo $category_list[$i]['category_id']; ?>">
+                                    <?php echo $category_list[$i]['c_name']; ?>
+                                </a>
+                                <a href="../task/delete_category.php?category_id=<?php echo $category_list[$i]['category_id'] ?>">
+                                    <button class="three-point">&#8942; &nbsp 削除</button>
+                                </a>
+                                <a href="edit_category.view.php?category_id=<?php echo $category_list[$i]['category_id'] ?>">
+                                    <button class="three-point">編集</button>
+                                </a>
+                            <?php } ?>
                         </div>
                     <?php
                     }
@@ -50,19 +58,19 @@ require('./../task/task_show.php');
 
         <!-- タスク一覧画面 -->
         <div class="task-show">
-        <?php if ($_SESSION['complete']) {
-            echo "<h2>{$member_name[0]['member_name']}さんのアカウント登録が完了しました </h2>";
-            unset($_SESSION['complete']);
-        }?>
-        <h3>こんにちは、<?php echo $member_name[0]['member_name']?>さん</h3>
+            <?php if ($_SESSION['complete']) {
+                echo "<h2>{$member_name[0]['member_name']}さんのアカウント登録が完了しました </h2>";
+                unset($_SESSION['complete']);
+            } ?>
+            <h3>こんにちは、<?php echo $member_name[0]['member_name'] ?>さん</h3>
             <form action="./../task/delete_task.php" method="post">
                 <div class="delete-button">
                     <input type="submit" name="delete" value="削除">
                     <span class="red">
-                    <?php
-                     if ($_SESSION['err_delete']) {
-                        echo $_SESSION['err_delete'];
-                    }?>
+                        <?php
+                        if ($_SESSION['err_delete']) {
+                            echo $_SESSION['err_delete'];
+                        } ?>
                     </span>
                 </div>
                 <ul>
