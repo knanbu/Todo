@@ -258,9 +258,22 @@ class Task
         return;
     }
 
-    public function delete_category() //カテゴリーの削除
+    public function delete_category($category_id) //カテゴリーの削除
     {
-        # code...
+        $this->delete_category_task($category_id); //カテゴリー内のタスクの削除
+        $table = ' Category ';
+        $column = '  category_id=:category_id ';
+        $pre_value = [':category_id' => $category_id];
+        $this->pdo->delete($table, $column, $pre_value);
+        return;
+    }
+    private function delete_category_task($category_id)//カテゴリー内のタスクの削除
+    {
+        $table = ' TCList ';
+        $column = '  category_id=:category_id ';
+        $pre_value = [':category_id'=>$category_id];
+        $this->pdo->delete($table, $column, $pre_value);
+        return;
     }
     private function check_space(&$data) //空白をnullに変える
     {

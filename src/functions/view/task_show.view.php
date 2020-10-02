@@ -28,7 +28,7 @@ require('./../task/task_show.php');
                                 <?php echo $category_list[$i]['c_name']; ?>
                             </a>
 
-                            <a href="edit_category.view.php?category_id=<?php echo $category_list[$i]['category_id'] ?>">
+                            <a href="../task/delete_category.php?category_id=<?php echo $category_list[$i]['category_id'] ?>">
                                 <button class="three-point">&#8942; &nbsp 削除</button>
                             </a>
                             <a href="edit_category.view.php?category_id=<?php echo $category_list[$i]['category_id'] ?>">
